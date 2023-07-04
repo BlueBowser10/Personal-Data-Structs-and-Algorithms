@@ -1,6 +1,7 @@
 /** This class implements a dynamic Queue ADT supported by a
  * Singularly Linked List.
- * 
+ * @param <T> THe type the queue holds
+ * @author BlueBowser
  */
 public class Queue<T> {
     /** The LinkedList that will hold the queue data. */
