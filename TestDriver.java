@@ -5,18 +5,19 @@ public class TestDriver {
         //System.out.println("\nDoubly Linked List Testing: good!");
         //System.out.println("\nStack Testing: good!");
         //System.out.println("\nQueue Testing: good!");
-        System.out.println("DEQue Testing: ...");
+        //System.out.println("DEQue Testing: good!");
 
-        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
-        list.addFirst(1);
-        list.addFirst(2);
-        list.addFirst(3);
-        list.addFirst(4);
-        list.addFirst(5);
-        
-        for (Integer i : list) {
-            System.out.println(i);
-        }
+        Stack<Integer> s = new Stack<>();
+        s.push(1);
+        s.push(2);
+        s.push(3);
+
+        Stack<Integer> s2 = new Stack<>();
+        s2.push(1);
+        s2.push(2);
+        s2.push(3);
+
+        System.out.print(s.equals(s2));
 
     }
 }

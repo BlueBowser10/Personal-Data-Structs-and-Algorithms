@@ -3,3 +3,6 @@
 
 # ignore all markdown files
 *.md
+
+# ignore the TestDriver 
+TestDriver.java
