@@ -7,11 +7,19 @@ public class TestDriver {
         //System.out.println("\nQueue Testing: good!");
         System.out.println("DEQue Testing: ...");
 
-        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
         list.addFirst(1);
         list.addFirst(2);
         list.addFirst(3);
         list.addFirst(4);
         System.out.println(list);
+
+        LinkedList<String> list2 = new LinkedList<>();
+        list2.addFirst("a");
+        list2.addFirst("b");
+        list2.addFirst("c");
+        list2.addFirst("d");
+        System.out.println(list2);
+        System.out.println(list.equals(list2));
     }
 }

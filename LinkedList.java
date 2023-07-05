@@ -1,5 +1,6 @@
 import java.lang.IndexOutOfBoundsException;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 
 /** This is a generic Singularly Linked List. It is an implementation of a
@@ -162,5 +163,32 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     @Override
     public ListIterator<T> iterator() {
         return new ListIterator<T>();
+    }
+
+    /**
+     * Returns whether two LinkedLists are equal. Two LinkedLists are equal if
+     * they have the smae size and hold the same elements.
+     * @return a boolean: {@code true} if the objects are equal and
+     * {@code false} otherwise
+     */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LinkedList)) {
+            return false;
+        }
+        LinkedList other = (LinkedList) o;
+        if (other.size != this.size) {
+            return false;
+        }
+        ListIterator iter = this.iterator();
+        ListIterator otherIter = other.iterator();
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
