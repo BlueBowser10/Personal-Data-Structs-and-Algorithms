@@ -1,4 +1,8 @@
-/**This is an interface that defines the operatiosn of a Singly Linked List ADT. IT is to be implemented further using classes.
+import java.util.NoSuchElementException;
+
+/**
+ * This is an interface that defines the operatiosn of a Singly Linked List ADT. It is to be implemented further using classes.
+ * 
  * @param <T> the type that the list holds
  * @author BlueBowser
  */
@@ -20,35 +24,41 @@ interface SinglyLinkedList<T> {
     /**Adds an element to the head of the linked list, and shifts all elements
      * down by one.
      * 
-     * @param elem the element to be added
+     * @param elem the element to be added. Must not be null.
+     * @throws IllegalArgumentException when the value passed is null
      */
-    public void addFirst(T elem);
-
-    /**Adds an elemet to the tail of the linked lists,and shifts all the
-     * elements up by one.
-     * 
-     * @param elem the element to be added
-     */
-    public void addLast(T elem);
+    public void addFirst(T elem) throws IllegalArgumentException;
 
     /**
-     * Reemoves the the item at the beginning of the list, if any exists
-     * @return the first time that was removed from the beginning.
-     * @throws IndexOutOfBoundsException when the list is empty
+     * Adds an element to the tail of the linked lists, and shifts all the
+     * elements up by one.
+     * 
+     * @param elem the element to be added. Must not be null.
+     * @throws IllegalArgumentException when the value passed is null
      */
-    public T removeFirst() throws IndexOutOfBoundsException;
+    public void addLast(T elem) throws IllegalArgumentException;
+
+    /**
+     * Reemoves the the item at the beginning of the list, if any exists,
+     *  and returns it.
+     * 
+     * @return the first time that was removed from the beginning.
+     * @throws NoSuchElementException when the list is empty
+     */
+    public T removeFirst() throws NoSuchElementException;
 
     /**
      * Returns the first element in the list.
      * @return the head element
-     * @throws IndexOutOfBoundsException when the list is empty
+     * @throws NoSuchElementException when the list is empty
      */
-    public T first() throws IndexOutOfBoundsException;
+    public T first() throws NoSuchElementException;
 
     /**
      * Returns the last element in the list.
+     * 
      * @return the tail element
-     * @throws IndexOutOfBoundsException when the list is empty
+     * @throws NoSuchElementException when the list is empty
      */
-    public T last() throws IndexOutOfBoundsException;
+    public T last() throws NoSuchElementException;
 }

@@ -14,14 +14,13 @@ public class TestDriver {
         list.addFirst(4);
         System.out.println(list);
 
+
         LinkedList<String> list2 = new LinkedList<>();
-        list2.addFirst("a");
-        list2.addFirst("b");
-        list2.addFirst("c");
-        list2.addFirst("d");
+        list2.addFirst("null");
+        list2.addFirst("null");
+        list2.addFirst("null");
+        list2.addFirst("null");
         System.out.println(list2);
         System.out.println(list.equals(list2));
-        //comment
-        //ducks
     }
 }

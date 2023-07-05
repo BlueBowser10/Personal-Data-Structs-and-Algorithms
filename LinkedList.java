@@ -1,6 +1,5 @@
 import java.lang.IndexOutOfBoundsException;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 
 /** This is a generic Singularly Linked List. It is an implementation of a
@@ -185,8 +184,13 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         ListIterator iter = this.iterator();
         ListIterator otherIter = other.iterator();
         while (iter.hasNext()) {
-            if (!iter.next().equals(otherIter.next())) {
-                return false;
+            boolean equal;
+            try {
+            T otherElem = (T) otherIter.next();
+            System.out.print(otherElem);
+            } catch (Exception e) {
+                System.out.println(e);
+                break;
             }
         }
         return true;

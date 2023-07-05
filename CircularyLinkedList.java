@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.ListIterator;
 
 /**This class implements a Circularly Linked List ADT, where the tail Node links
  * to the head Node.
@@ -183,5 +184,33 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     @Override
     public CircularListIterator<T> iterator() {
         return new CircularListIterator<T>();
+    }
+
+    /**
+     * Returns whether two Circularly LinkedLists are equal. 
+     * Two LinkedLists are equal if
+     * they have the smae size and hold the same elements.
+     * @return a boolean: {@code true} if the objects are equal and
+     * {@code false} otherwise
+     */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CircularyLinkedList)) {
+            return false;
+        }
+        CircularyLinkedList other = (CircularyLinkedList) o;
+        if (other.size != this.size) {
+            return false;
+        }
+        Iterator iter = this.iterator();
+        Iterator otherIter = other.iterator();
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
