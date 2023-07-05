@@ -1,9 +1,12 @@
-/** This is an implementation of a Doubly Linked Node, which points to the
- * next and previous nodes. It is generic.
+/**
+ * This is an implementation of a Doubly Linked Node, which points to the
+ * next and previous nodes. It is generic. It can hold null values, but only
+ * in the cases that it is a sentinel node (a node at the beginning or end
+ *  of the doubly linked list).
  * @param <T> the type a Node holds
  * @author BlueBowser
  */
-public class DoubleNode<T> extends Node<T>{
+public class DoubleNode<T> {
     /**The data that the node holds */
     T data;
     /**The next node.*/
@@ -22,8 +25,10 @@ public class DoubleNode<T> extends Node<T>{
         this.prev = null;
     }
 
-    /** Default constructor which initlializes an empty DoubleNode object not
-     * pointing to anything.
+    /**
+     * Default constructor which initlializes an empty DoubleNode object not
+     * pointing to anything. Only use this function when creating a
+     *  sensintel node.
      */
     public DoubleNode() {
         this(null);
@@ -41,7 +46,10 @@ public class DoubleNode<T> extends Node<T>{
      * Sets the element within node to a newer element.
      * @param elem the new value that the node will contain
      */
-    public void setElement(T elem) {
+    public void setElement(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("DoubleNode cannot hold null element!");
+        }
         this.data = elem;
     }
 
@@ -75,5 +83,24 @@ public class DoubleNode<T> extends Node<T>{
      */
     public void setPrev(DoubleNode<T> node) {
         this.prev = node;
+    }
+
+    /**
+     * Determines if two DoubleNode are equal. Two nodes are equal if they have
+     *  the same type and the same value.
+     * 
+     * @param o The object to be checked
+     * @return a booolean: {@code true} if both objects are equal and
+     *  {@code false} otherwise.
+     */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DoubleNode)) {
+            return false;
+        }
+        DoubleNode other = (DoubleNode) o;
+        return this.data.equals(other.data);
     }
 }

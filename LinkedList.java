@@ -1,5 +1,5 @@
-import java.lang.IndexOutOfBoundsException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /** This is a generic Singularly Linked List. It is an implementation of a
@@ -11,13 +11,15 @@ import java.util.Iterator;
 public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     /**An iterator for the LinkedList. This inner class can help to iterate
      * through the list, starting from head to tail.
+     * 
      * @param <T> the type that the iterator holds
      * @author BlueBowser
     */
     public class ListIterator<T> implements Iterator<T> {
         /** The Node representing the start of the list. */
         Node list;
-        /** Default constructor that creates an Iterator that starts at the
+        /** 
+         * Default constructor that creates an Iterator that starts at the
          * head node.
          */
         public ListIterator() {
@@ -26,6 +28,7 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         /**
          * Sees if the iterator can continue iterating, and an node exists
          * at the current point.
+         * 
          * @return a boolean: {@code true} if there is another node to
          * iterate on, {@code false} otherwise.
          */
@@ -37,8 +40,9 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         }
 
         /**
-         * Returns the element at the current node and advances to the next'
-         * node.
+         * Returns the element at the current node and advances to the next
+         * node, if one exists.
+         * 
          * @return the current element at the next 
          * @throws IllegalStateException if you finish iterating and there are
          * no more items to iterate over or the list is empty.
@@ -62,7 +66,8 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     /**The size of the list (the number of Nodes in the list) */
     private int size;
 
-    /** Default constructor for a LinkedList. This initializes an empty
+    /**
+     * Default constructor for a LinkedList. This initializes an empty
      * LinkedList.
      */
     public LinkedList() {
@@ -82,7 +87,10 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
     
     @Override
-    public void addFirst(T elem) {
+    public void addFirst(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         Node<T> n = new Node<>(elem);
         if (this.isEmpty()) {
             this.head = n;
@@ -95,7 +103,10 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public void addLast(T elem) {
+    public void addLast(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         Node<T> n = new Node<>(elem);
         if (this.isEmpty()) {
             this.head = n;
@@ -108,9 +119,9 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
     
     @Override
-    public T removeFirst() throws IndexOutOfBoundsException {
+    public T removeFirst() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("The list is empty!");
+            throw new NoSuchElementException("The list is empty!");
         } else {
             T data = this.head.getElement();
             if (this.size() == 1) {
@@ -129,17 +140,17 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public T first() throws IndexOutOfBoundsException {
+    public T first() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         return this.head.getElement();
     }
 
     @Override
-    public T last() throws IndexOutOfBoundsException {
+    public T last() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         return this.tail.getElement();
     }
@@ -166,7 +177,7 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
 
     /**
      * Returns whether two LinkedLists are equal. Two LinkedLists are equal if
-     * they have the smae size and hold the same elements.
+     * they have the smae size and hold the same elements in the same order.
      * @return a boolean: {@code true} if the objects are equal and
      * {@code false} otherwise
      */
@@ -181,16 +192,11 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         if (other.size != this.size) {
             return false;
         }
-        ListIterator iter = this.iterator();
-        ListIterator otherIter = other.iterator();
+        Iterator iter = this.iterator();
+        Iterator otherIter = other.iterator();
         while (iter.hasNext()) {
-            boolean equal;
-            try {
-            T otherElem = (T) otherIter.next();
-            System.out.print(otherElem);
-            } catch (Exception e) {
-                System.out.println(e);
-                break;
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
             }
         }
         return true;

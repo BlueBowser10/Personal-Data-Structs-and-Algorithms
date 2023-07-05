@@ -1,4 +1,7 @@
-/**This class implements a dynamic Stack ADT using a LinkedList. 
+import java.util.NoSuchElementException;
+
+/**
+ * This class implements a dynamic Stack ADT using a LinkedList. 
  * @param <T> the element the stack holds
  * @author BlueBowser
 */
@@ -30,27 +33,37 @@ public class Stack<T> {
 
     /**
      * Places an element on the top of a Stack.
-     * @param elem the element to be pushed to the stack.
+     * @param elem the element to be pushed to the stack. Must not be null.
+     * @throws IllegalArgumentException when the element passed is null
      */
-    public void push(T elem) {
+    public void push(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("cannot push null value to stack!");
+        }
         this.pile.addFirst(elem);
     }
 
     /**
      * Removes the top element on the Stack.
      * @return the elemement on top of the stack.
-     * @throws IndexOutOfBoundsException if the list is empty
+     * @throws NoSuchElementException if the list is empty
      */
-    public T pop() throws IndexOutOfBoundsException {
+    public T pop() throws NoSuchElementException {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("the stack is empty!");
+        }
         return this.pile.removeFirst();
     }
 
     /**
      * Looks at the top element on the stack.
      * @return the top element on the stack
-     * @throws IndexOutOfBoundsException if the list is empty
+     * @throws NoSuchElementException if the list is empty
      */
-    public T top() throws IndexOutOfBoundsException {
+    public T top() throws NoSuchElementException {
+        if (this.isEmpty()) {
+            throw new NoSuchElementException("the stack is empty!");
+        }
         return this.pile.first();
     }
 
@@ -58,5 +71,23 @@ public class Stack<T> {
     public String toString() {
         //kind of hacky, need to fix toString
         return "Stack" + pile.toString().substring(12);
+    }
+
+    /**
+     * Determines if two Stacks are equal. Two stacks are equals if they have
+     * the same elements of the same type in the same order.
+     * @param o object to be checked
+     * @return a boolean: {@code true} if the objects are equal
+     *  and {@code false} otherwise.
+     */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Stack)) {
+            return false;
+        }
+        Stack other = (Stack) o;
+        return this.pile.equals(other.pile);
     }
 }

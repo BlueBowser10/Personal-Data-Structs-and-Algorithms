@@ -1,42 +1,28 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-/**This implements a Doubly Linked List ADT, where nodes link the next nodes and previous nodes. This approach uses two dummy DoubleNOdes at the beginning and the end to make thins a lot easier to implement.
+/**
+ * This implements a Doubly Linked List ADT, where nodes link the next nodes and previous nodes. This approach uses two dummy DoubleNodes at the beginning and the end to make thins a lot easier to implement.
  * @param <T> the type that the list holds
  * @author BlueBowser
 */
 public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
-/**An iterator for the DoublyLinkedList. This inner class can help to iterate
-     * through the list, starting from head to tail.
+    /**
+     * An iterator for the DoublyLinkedList. This inner class
+     *  can help to iterate through the list, starting from head to tail.
      * @param <T> the type that the iterator holds
      * @author BlueBowser
     */
     public class DoubleListIterator<T> implements Iterator<T> {
         /** The Node representing the start of the list. */
         DoubleNode list;
-        /** Whether you should iterate all the way through a list and back,
-         * so from head to tail, and then back to head.
-         */
-        boolean roundTrip;
-        /** Whether the iterator has reached the end of the list. */
-        boolean reachedEnd;
-        /** Default constructor that creates an Iterator that starts at the
-         * head node. It iterates only from head to tail.
-         */
-        public DoubleListIterator() {
-            this(false);
-        }
 
         /**
          * Full constructor that creates and Iterator that traverses like a
-         * normal list, or traverses back to the beginnign
-         * @param roundTrip a boolean; {@code true} if you want to iterate
-         * from head to tail and back to head, {@code false} if you only want
-         * to iterate from head to tail.
+         * normal list.
          */
-        public DoubleListIterator(boolean roundTrip) {
+        public DoubleListIterator() {
             list = HEAD.next();
-            this.roundTrip = roundTrip;
-            reachedEnd = false;
         }
         /**
          * Sees if the iterator can continue iterating, and an node exists
@@ -45,9 +31,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
          * iterate on, {@code false} otherwise.
          */
         public boolean hasNext() {
-            if (isEmpty() 
-                || (!roundTrip && reachedEnd)
-                || (roundTrip && list == HEAD)) {
+            if (isEmpty() || list == TAIL) {
                 return false;
             }
             return true;
@@ -65,22 +49,11 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
                 throw new IllegalStateException("no more iterable nodes!",
                     null);
             }
-            if (!reachedEnd) {
-                T elem = (T) list.getElement();
-                if (list.next() == TAIL) {
-                    reachedEnd = true;
-                } else {
-                    list = list.next();
-                }
-                return elem;
-            } else {
-                T elem = (T) list.getElement();
-                list = list.prev();
-                return elem;
-            }
+            T elem = (T) list.getElement();
+            list = list.next();
+            return elem;
         }
     }
-
 
     /**The head dummy node which is the marker for the beginning of the list. */
     private DoubleNode<T> HEAD;
@@ -111,7 +84,10 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public void addFirst(T elem) {
+    public void addFirst(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         DoubleNode<T> node = new DoubleNode<>(elem);
         if (this.isEmpty()) {
             this.addBetween(node, HEAD, TAIL);
@@ -122,7 +98,10 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public void addLast(T elem) {
+    public void addLast(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         DoubleNode<T> node = new DoubleNode<>(elem);
         if (this.isEmpty()) {
             this.addBetween(node, HEAD, TAIL);
@@ -133,9 +112,9 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public T removeFirst() throws IndexOutOfBoundsException {
+    public T removeFirst() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         T data = HEAD.next().getElement();
         removeBetween(HEAD, HEAD.next().next());
@@ -146,11 +125,11 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     /**
      * Reemoves the the item at the end of the list, if any exist
      * @return the last time that was removed from the beginning.
-     * @throws IndexOutOfBoundsException when the list is empty
+     * @throws NoSuchElementException when the list is empty
      */
-    public T removeLast() throws IndexOutOfBoundsException {
+    public T removeLast() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         T data = TAIL.prev().getElement();
         this.removeBetween(TAIL.prev().prev(), TAIL);
@@ -159,17 +138,17 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public T first() throws IndexOutOfBoundsException {
+    public T first() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         return HEAD.next().getElement();
     }
 
     @Override
-    public T last() throws IndexOutOfBoundsException {
+    public T last() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         return TAIL.prev().getElement();
     }
@@ -217,5 +196,32 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     @Override
     public DoubleListIterator<T> iterator() {
         return new DoubleListIterator<T>();
+    }
+
+    /**
+     * Returns whether two DoublyLinkedLists are equal. Two DoublyLinkedLists
+     *  are equal if they have the smae size and hold the same elements in the same order.
+     * @return a boolean: {@code true} if the objects are equal and
+     * {@code false} otherwise
+     */
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DoublyLinkedList)) {
+            return false;
+        }
+        DoublyLinkedList other = (DoublyLinkedList) o;
+        if (other.size != this.size) {
+            return false;
+        }
+        Iterator iter = this.iterator();
+        Iterator otherIter = other.iterator();
+        while (iter.hasNext()) {
+            if (!iter.next().equals(otherIter.next())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

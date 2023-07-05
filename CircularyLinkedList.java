@@ -1,12 +1,14 @@
 import java.util.Iterator;
-import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
-/**This class implements a Circularly Linked List ADT, where the tail Node links
+/**
+ * This class implements a Circularly Linked List ADT, where the tail Node links
  * to the head Node.
  * @param <T> the type that the list holds
  */
 public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
-    /**An iterator for the CirculalyLinkedList. This inner class can help to
+    /**
+     * An iterator for the CirculalyLinkedList. This inner class can help to
      * iterate through the list, starting from head to tail.
      * @param <T> the type that the iterator holds
      * @author BlueBowser
@@ -18,7 +20,8 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
          * the circle.
          */
         boolean fullCircle;
-        /** Default constructor that creates an Iterator that starts at the
+        /**
+         * Default constructor that creates an Iterator that starts at the
          * head node.
          */
         public CircularListIterator() {
@@ -41,6 +44,7 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
         /**
          * Returns the element at the current node and advances to the next
          * node, stopping when the head has been reached.
+         * 
          * @return the current element at the next 
          * @throws IllegalStateException if you finish iterating and you reached
          * the head or the list is empty
@@ -85,7 +89,10 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     }
 
     @Override
-    public void addFirst(T elem) {
+    public void addFirst(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         Node<T> node = new Node<>(elem);
         if (this.isEmpty()) {
             node.setNext(node);
@@ -101,7 +108,10 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     }
 
     @Override
-    public void addLast(T elem) {
+    public void addLast(T elem) throws IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("you cannot add a null element!");
+        }
         Node<T> node = new Node<>(elem);
         if (this.isEmpty()) {
             node.setNext(node);
@@ -117,9 +127,9 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     }
 
     @Override
-    public T removeFirst() throws IndexOutOfBoundsException {
+    public T removeFirst() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         } else {
             T data;
             if (this.size == 1) {
@@ -138,25 +148,25 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     }
 
     @Override
-    public T first() throws IndexOutOfBoundsException {
+    public T first() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("the list is empty!");
+            throw new NoSuchElementException("the list is empty!");
         }
         return this.head.getElement();
     }
 
     @Override
-    public T last() throws IndexOutOfBoundsException {
+    public T last() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new IndexOutOfBoundsException("this list is empty!");
+            throw new NoSuchElementException("this list is empty!");
         }
         return this.tail.getElement();
     }
 
     /**
      * Rotates around the circularly linked list by advancing the head
-     * and tail by one, setting the head to the next Node and the tail
-     * to the next Node.
+     * and tail by one, setting the head to its next Node and the tail
+     * to its next Node.
      */
     public void rotate() {
         this.tail = this.tail.next();
@@ -187,9 +197,10 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
     }
 
     /**
-     * Returns whether two Circularly LinkedLists are equal. 
+     * Returns whether two CircularlyLinkedLists are equal. 
      * Two LinkedLists are equal if
-     * they have the smae size and hold the same elements.
+     * they have the smae size and hold the same elements in the same order
+     * relative to their head nodes.
      * @return a boolean: {@code true} if the objects are equal and
      * {@code false} otherwise
      */
