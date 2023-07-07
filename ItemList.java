@@ -5,4 +5,4 @@
  * @author BlueBowser
  */
 
- //public class ItemList<T> implements List<T> {}
+//public class ItemList<T> implements ListInterface<T> {}

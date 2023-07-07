@@ -193,9 +193,118 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         b.setPrev(a);
     }
 
+    /**
+     * Inserts an element at the {@code pos}th Node in the DoublyLinkedList.
+     * The element must not be null. The head is at index 0, and the tail is
+     *  at index {@code this.size - 1}. If you insert an index in the
+     *  {@code this.size}th index, it will add a new element at the end of the
+     *  List.
+     * @param elem the element to be inserted. Must not be null.
+     * @param pos the index of the element. Must be within the bounds of the list.
+     * @throws IllegalArgumentException if the element is null
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     */
+    public void insert(T elem, int pos) 
+        throws IllegalArgumentException, IndexOutOfBoundsException {
+        if (elem == null) {
+            throw new IllegalArgumentException("cannot insert a null element!");
+        }
+        if ((pos < 0) || (pos > this.size)) {
+            throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
+        }
+        if (pos == 0) {
+            this.addFirst(elem);
+        }
+        if (pos == this.size) {
+            this.addLast(elem);
+        } else {
+            int i = 0;
+            DoubleNode<T> list = this.HEAD.next();
+            while (i < pos - 1) {
+                list = list.next();
+                ++i;
+            }
+            this.addBetween(new DoubleNode<T>(elem), list, list.next());
+        }
+    }
+
+    /**
+     * Removes the element from the {@code pos}th position in the list,
+     *  and returns it
+     * @param pos the index of the element to be removed
+     * @return the element at that index
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     */
+    public T remove(int pos) throws IndexOutOfBoundsException {
+        if ((pos < 0) || (pos > this.size)) {
+            throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
+        }
+        DoubleNode<T> list = this.HEAD.next();
+        int i = 0;
+        while (i < pos) {
+            list = list.next();
+            ++i;
+        }
+        T data = (T) list.getElement();
+        this.removeBetween(list.prev(), list.next());
+        return data;
+    }
+
+    /**
+     * Gets the element at index i in the doubly linked list.
+     * The head starts at an index of 0, and the tail is at an index
+     * of {@code this.size - 1}.
+     * 
+     * @param pos the index of the elemen
+     * @return the element at that position
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     */
+    public T get(int pos) throws IndexOutOfBoundsException {
+        if ((pos < 0) || (pos > this.size - 1)) {
+            throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
+        }
+        int i = 0;
+        DoubleNode<T> list = this.HEAD.next();
+        while (i < pos) {
+            list = list.next();
+            ++i;
+        }
+        return list.getElement();
+    }
+
+    
+
     @Override
     public DoubleListIterator<T> iterator() {
         return new DoubleListIterator<T>();
+    }
+
+    /**
+     * Gets the element at index i in the doubly linked list.
+     * The head starts at an index of 0, and the tail is at an index
+     * of {@code this.size - 1}.
+     * 
+     * @param elem the element to be added to the list. Must not be null.
+     * @param pos the index of the elemen. Must be nonnegative and less than the size of the list.
+     * @return the element at that position
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     * @throws IllegalArgumentException if the element is null.
+     */
+    public void set(T elem, int pos)
+        throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (elem == null) {
+            throw new IllegalArgumentException("Can't add null value to the lsit.");
+        }
+        if ((pos < 0) || (pos > this.size - 1)) {
+            throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
+        }
+        int i = 0;
+        DoubleNode<T> list = this.HEAD.next();
+        while (i < pos) {
+            list = list.next();
+            ++i;
+        }
+        list.setElement(elem);
     }
 
     /**
