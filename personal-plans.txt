@@ -1,3 +1,0 @@
-List ADT -- just a List ADT
-PositionalList ADT -- like a list, but with a built in cursor where you can keep track of what you wrote
-AccessList ADT -- list that implements move to front heuristic: whenever data is accessed it is moved to the front of the list
