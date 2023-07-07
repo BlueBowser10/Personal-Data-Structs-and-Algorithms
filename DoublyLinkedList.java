@@ -181,6 +181,13 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         //update back links
         b.setPrev(node);
         node.setPrev(a);
+
+        if (a == HEAD) {
+            a.setPrev(node);
+        }
+        if (b == TAIL) {
+            b.setNext(node);
+        }
     }
 
         /**
@@ -191,6 +198,12 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     private void removeBetween(DoubleNode<T> a, DoubleNode<T> b) {
         a.setNext(b);
         b.setPrev(a);
+        if (b == TAIL) {
+            b.setNext(a);
+        }
+        if (a == HEAD) {
+            a.setPrev(b);
+        }
     }
 
     /**
@@ -211,11 +224,9 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         }
         if ((pos < 0) || (pos > this.size)) {
             throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
-        }
-        if (pos == 0) {
+        } else if (pos == 0) {
             this.addFirst(elem);
-        }
-        if (pos == this.size) {
+        } else if (pos == this.size) {
             this.addLast(elem);
         } else {
             int i = 0;

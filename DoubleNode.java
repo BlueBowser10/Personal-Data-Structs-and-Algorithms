@@ -103,4 +103,9 @@ public class DoubleNode<T> {
         DoubleNode other = (DoubleNode) o;
         return this.data.equals(other.data);
     }
+
+    @Override
+    public String toString() {
+        return prev.getElement() + " <-- " + this.data + " --> " + next.getElement();
+    }
 }

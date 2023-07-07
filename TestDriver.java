@@ -7,17 +7,14 @@ public class TestDriver {
         //System.out.println("\nQueue Testing: good!");
         //System.out.println("DEQue Testing: good!");
 
-        Stack<Integer> s = new Stack<>();
-        s.push(1);
-        s.push(2);
-        s.push(3);
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addLast(3);
+        list.addLast(4);
+        list.insert(100, 4);
+        list.insert(0, 0);
 
-        Stack<Integer> s2 = new Stack<>();
-        s2.push(1);
-        s2.push(2);
-        s2.push(3);
-
-        System.out.print(s.equals(s2));
-
+        System.out.println(list.remove(3));
     }
 }
