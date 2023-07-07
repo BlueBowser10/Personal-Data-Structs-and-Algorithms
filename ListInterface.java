@@ -26,7 +26,7 @@ interface ListInterface<T> {
      * @param i the index of the elemtn in the list
      * @return the element at that index
      * @throws IndexOutOfBoundsException if the index of the list is less than 0
-     * or greater than the List's size.
+     * or greater than the List's size minus one.
      */
     public T get(int i) throws IndexOutOfBoundsException;
     

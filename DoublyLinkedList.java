@@ -244,10 +244,10 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
      *  and returns it
      * @param pos the index of the element to be removed
      * @return the element at that index
-     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list minus one
      */
     public T remove(int pos) throws IndexOutOfBoundsException {
-        if ((pos < 0) || (pos > this.size)) {
+        if ((pos < 0) || (pos > this.size - 1)) {
             throw new IndexOutOfBoundsException(pos + " out of bounds for size " + this.size);
         }
         DoubleNode<T> list = this.HEAD.next();
@@ -268,7 +268,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
      * 
      * @param pos the index of the elemen
      * @return the element at that position
-     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list minus one
      */
     public T get(int pos) throws IndexOutOfBoundsException {
         if ((pos < 0) || (pos > this.size - 1)) {
@@ -298,7 +298,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
      * @param elem the element to be added to the list. Must not be null.
      * @param pos the index of the elemen. Must be nonnegative and less than the size of the list.
      * @return the element at that position
-     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list
+     * @throws IndexOutOfBoundsException if the pos argument is negative or greater than the size of the list minus one
      * @throws IllegalArgumentException if the element is null.
      */
     public void set(T elem, int pos)
