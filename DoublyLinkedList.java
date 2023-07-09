@@ -236,6 +236,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
                 ++i;
             }
             this.addBetween(new DoubleNode<T>(elem), list, list.next());
+            ++this.size;
         }
     }
 
@@ -258,6 +259,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         }
         T data = (T) list.getElement();
         this.removeBetween(list.prev(), list.next());
+        --this.size;
         return data;
     }
 

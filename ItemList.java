@@ -49,5 +49,22 @@ public class ItemList<T> implements ListInterface<T> {
     public T remove(int i) throws IndexOutOfBoundsException {
         return this.list.remove(i);
     }
+
+    @Override
+    public String toString() {
+        return "List " + this.list.toString().substring(19);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ItemList)) {
+            return false;
+        }
+        ItemList other = (ItemList) o;
+        return this.list.equals(other.list);
+    }
     
 }
