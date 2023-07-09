@@ -1,14 +1,14 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import ADTInterfaces.SinglyLinkedList;
+import ADTInterfaces.CircularlyLinkedListInterface;
 
 /**
  * This class implements a Circularly Linked List ADT, where the tail Node links
  * to the head Node.
  * @param <T> the type that the list holds
  */
-public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
+public class CircularyLinkedList<T> implements CircularlyLinkedListInterface<T>, Iterable<T> {
     /**
      * An iterator for the CirculalyLinkedList. This inner class can help to
      * iterate through the list, starting from head to tail.
@@ -165,11 +165,7 @@ public class CircularyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> 
         return this.tail.getElement();
     }
 
-    /**
-     * Rotates around the circularly linked list by advancing the head
-     * and tail by one, setting the head to its next Node and the tail
-     * to its next Node.
-     */
+    @Override
     public void rotate() {
         this.tail = this.tail.next();
         this.head = this.head.next();

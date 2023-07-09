@@ -1,6 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.DoublyLinkedLIstInterface;
 import ADTInterfaces.SinglyLinkedList;
 
 /**
@@ -8,7 +9,7 @@ import ADTInterfaces.SinglyLinkedList;
  * @param <T> the type that the list holds
  * @author BlueBowser
 */
-public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
+public class DoublyLinkedList<T> implements DoublyLinkedLIstInterface<T>, Iterable<T> {
     /**
      * An iterator for the DoublyLinkedList. This inner class
      *  can help to iterate through the list, starting from head to tail.
@@ -124,11 +125,7 @@ public class DoublyLinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
         return data;
     }
 
-    /**
-     * Reemoves the the item at the end of the list, if any exist
-     * @return the last time that was removed from the beginning.
-     * @throws NoSuchElementException when the list is empty
-     */
+    @Override
     public T removeLast() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the list is empty!");

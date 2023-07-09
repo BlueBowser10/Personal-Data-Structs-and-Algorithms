@@ -2,7 +2,8 @@ package ADTInterfaces;
 import java.util.NoSuchElementException;
 
 /**
- * This is an interface that defines the operatiosn of a Singly Linked List ADT. It is to be implemented further using classes.
+ * This is an interface that defines the operatiosn of a Singly Linked List 
+ * ADT. It is to be implemented further using classes.
  * 
  * @param <T> the type that the list holds
  * @author BlueBowser
