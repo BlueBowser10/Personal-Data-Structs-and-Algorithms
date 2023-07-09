@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.SinglyLinkedList;
+
 /**
  * This implements a Doubly Linked List ADT, where nodes link the next nodes and previous nodes. This approach uses two dummy DoubleNodes at the beginning and the end to make thins a lot easier to implement.
  * @param <T> the type that the list holds

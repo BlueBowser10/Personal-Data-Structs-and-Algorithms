@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.SinglyLinkedList;
+
 /**
  * This class implements a Circularly Linked List ADT, where the tail Node links
  * to the head Node.

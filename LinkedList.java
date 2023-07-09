@@ -1,6 +1,8 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.SinglyLinkedList;
+
 
 /** This is a generic Singularly Linked List. It is an implementation of a
  * Linked List ADT.

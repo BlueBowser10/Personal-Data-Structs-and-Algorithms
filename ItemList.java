@@ -1,4 +1,4 @@
-import ATDInterfaces.ListInterface;
+import ADTInterfaces.ListInterface;
 
 /**
  * This is an implementation of the List ADT. It uses a doubly linked
