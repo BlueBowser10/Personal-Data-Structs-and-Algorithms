@@ -1,5 +1,7 @@
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.DequeInterface;
+
 /**
  * This class implements a Deque ADT, a more general version of a Queue that
  * can add and remove elements from the front as well as the back. It uses the
@@ -7,7 +9,7 @@ import java.util.NoSuchElementException;
  * @param <T> the type that the Deque holds
  * @author BlueBowser
  */
-public class Deque<T> {
+public class Deque<T> implements DequeInterface<T> {
     /** The Doubly Linekd List that will hold the Deque data.*/
     private DoublyLinkedList<T> list;
 
@@ -16,27 +18,17 @@ public class Deque<T> {
         list = new DoublyLinkedList<>();
     }
 
-    /**
-     * Returns the size of the list.
-     * @return the sizse of the list
-     */
+    @Override
     public int size() {
         return this.list.size();
     }
 
-    /**
-     * Checks whether the list is empty.
-     * @return a boolean: {@code true} if it is empty, {@code false} otherwise
-     */
+    @Override
     public boolean isEmpty() {
         return this.list.isEmpty();
     }
 
-    /**
-     * Adds an element to the front of the Deque
-     * @param elem the element to be added. Must not be null.
-     * @throws IllegalArgumentException if the element entered is null.
-     */
+    @Override
     public void pushFront(T elem) throws IllegalArgumentException {
         if (elem == null) {
             throw new IllegalArgumentException("cannot add null element to the DEQue!");
@@ -44,11 +36,7 @@ public class Deque<T> {
         this.list.addFirst(elem);
     }
 
-    /**
-     * Adds an element to the back of the Deque
-     * @param elem the element to be added. Must not be null.
-     * @throws IllegalArgumentException if the element entered is null.
-     */
+    @Override
     public void pushBack(T elem) throws IllegalArgumentException  {
         if (elem == null) {
             throw new IllegalArgumentException("cannot add null element to the DEQue!");
@@ -56,11 +44,7 @@ public class Deque<T> {
         this.list.addLast(elem);
     }
 
-    /**
-     * Removes the element from the front of the Deque and returns it.
-     * @return the front element of the Deque
-     * @throws NoSuchElementException if the queue is empty
-     */
+    @Override
     public T popFront() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the DEQue is empty!");
@@ -68,11 +52,7 @@ public class Deque<T> {
         return this.list.removeFirst();
     }
 
-    /**
-     * REmoves the element from the back of the Deque and returns it.
-     * @return the back element of the Deque
-     * @throws NoSuchElementException if the queue is empty
-     */
+    @Override
     public T popBack() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the DEQue is empty!");
@@ -80,11 +60,7 @@ public class Deque<T> {
         return this.list.removeLast();
     }
 
-    /**
-     * Returns first element in the Deque
-     * @return the first element
-     * @throws NoSuchElementException if the queue is empty.
-     */
+    @Override
     public T first() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the DEQue is empty!");
@@ -92,11 +68,7 @@ public class Deque<T> {
         return this.list.first();
     }
 
-    /**
-     * Returns the last element in the Deque
-     * @return the last element
-     * @throws NoSuchElementException if the queue is empty
-     */
+    @Override
     public T last() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the DEQue is empty!");

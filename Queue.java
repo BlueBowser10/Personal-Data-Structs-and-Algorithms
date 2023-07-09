@@ -1,11 +1,12 @@
 import java.util.NoSuchElementException;
+import ADTInterfaces.QueueInterface;
 
 /** This class implements a dynamic Queue ADT supported by a
  * Singularly Linked List.
  * @param <T> THe type the queue holds
  * @author BlueBowser
  */
-public class Queue<T> {
+public class Queue<T> implements QueueInterface<T> {
     /** The LinkedList that will hold the queue data. */
     private LinkedList<T> list;
 
@@ -14,29 +15,17 @@ public class Queue<T> {
         list = new LinkedList<>();
     }
 
-    /**
-     * Gets the size of the queue
-     * @return the size of the queue.
-     */
+    @Override
     public int size() {
         return this.list.size();
     }
 
-    /**
-     * Checks whether the LinkedList is empty or not.
-     * 
-     * @return a boolean: {@code true} if the list is empty and {@code false}
-     * if it is not.
-     */
+    @Override
     public boolean isEmpty() {
         return (this.size() == 0);
     }
 
-    /**
-     * Add an item to the back of the queue.
-     * @param elem the item to be added to the back. Must not be null.
-     * @throws IllegalArgumentException if the element is null
-     */
+    @Override
     public void enqueue(T elem) throws IllegalArgumentException {
         if (elem == null) {
             throw new IllegalArgumentException("cannt add null element to the queue!");
@@ -44,11 +33,7 @@ public class Queue<T> {
         this.list.addLast(elem);
     }
 
-    /**
-     * Remove item from the front of the queue and return it.
-     * @return the front element of the queue
-     * @throws NoSuchElementException if the queue is empty
-     */
+    @Override
     public T dequeue() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the queue is empty");
@@ -56,11 +41,7 @@ public class Queue<T> {
         return this.list.removeFirst();
     }
 
-    /**
-     * Gets the first item in the queue.
-     * @return the first item in the queue.
-     * @throws NoSuchElementException if the list is empty.
-     */
+    @Override
     public T first() throws NoSuchElementException {
         return this.list.first();
     }

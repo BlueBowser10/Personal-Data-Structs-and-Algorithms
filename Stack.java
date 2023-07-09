@@ -1,11 +1,13 @@
 import java.util.NoSuchElementException;
 
+import ADTInterfaces.StackInterface;
+
 /**
  * This class implements a dynamic Stack ADT using a LinkedList. 
  * @param <T> the element the stack holds
  * @author BlueBowser
 */
-public class Stack<T> {
+public class Stack<T> implements StackInterface<T> {
     /** The LinkedList that will hold the Stack data. */
     private LinkedList<T> pile;
 
@@ -14,28 +16,17 @@ public class Stack<T> {
         pile = new LinkedList<>();
     }
 
-    /**
-     * Returns the number of elements in the Stack.
-     * @return the number of elements in the stack.
-     */
+    @Override
     public int size() {
         return this.pile.size();
     }
 
-    /**
-     * Checks whether the stack is empty or not.
-     * @return a boolean: {@code true} if the list is empty and {@code false}
-     * otherwise.
-     */
+    @Override
     public boolean isEmpty() {
         return (this.size() == 0);
     }
 
-    /**
-     * Places an element on the top of a Stack.
-     * @param elem the element to be pushed to the stack. Must not be null.
-     * @throws IllegalArgumentException when the element passed is null
-     */
+    @Override
     public void push(T elem) throws IllegalArgumentException {
         if (elem == null) {
             throw new IllegalArgumentException("cannot push null value to stack!");
@@ -43,11 +34,7 @@ public class Stack<T> {
         this.pile.addFirst(elem);
     }
 
-    /**
-     * Removes the top element on the Stack.
-     * @return the elemement on top of the stack.
-     * @throws NoSuchElementException if the list is empty
-     */
+    @Override
     public T pop() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the stack is empty!");
@@ -55,11 +42,7 @@ public class Stack<T> {
         return this.pile.removeFirst();
     }
 
-    /**
-     * Looks at the top element on the stack.
-     * @return the top element on the stack
-     * @throws NoSuchElementException if the list is empty
-     */
+    @Override
     public T top() throws NoSuchElementException {
         if (this.isEmpty()) {
             throw new NoSuchElementException("the stack is empty!");
