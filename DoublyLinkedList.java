@@ -189,7 +189,7 @@ public class DoublyLinkedList<T> implements DoublyLinkedLIstInterface<T>, Iterab
         }
     }
 
-        /**
+    /**
      * Internal function for deleting a node between two other doubly linked nodes.
      * @param a the node before the node to delete
      * @param b the node after the node to delete
