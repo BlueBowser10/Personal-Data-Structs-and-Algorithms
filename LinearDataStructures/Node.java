@@ -1,3 +1,4 @@
+package LinearDataStructures;
 /**
  * This is a public generic Node class used to represent the Node
  * of a linked list.

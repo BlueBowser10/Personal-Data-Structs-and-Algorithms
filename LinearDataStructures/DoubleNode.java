@@ -1,3 +1,4 @@
+package LinearDataStructures;
 /**
  * This is an implementation of a Doubly Linked Node, which points to the
  * next and previous nodes. It is generic. It can hold null values, but only
