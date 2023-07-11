@@ -4,14 +4,19 @@ import ADTInterfaces.Position;
 import ADTInterfaces.TreeInterface;
 
 /**
- * This implements a tree data structure.
- * @param
- * @author
+ * This implements a Tree ADT. A tree is a linked node structure where there is
+ * a root node, and the root node branches out into other nodes. This is a
+ * very general tree, with no restrictions on the number of children a node can
+ * have.
+ * 
+ * @param <T> the type the tree holds
+ * @author BlueBowser
  * @see TreeInterface
  */
 public class Tree<T> implements TreeInterface<T> {
     /**
-     * Internal class
+     * Internal node class which represents a node on the tree.
+     * @param <T> the type the node holds.
      */
     private class Node<T> implements Position<T> {
         T element;
