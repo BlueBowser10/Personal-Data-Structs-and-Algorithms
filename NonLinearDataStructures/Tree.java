@@ -11,8 +11,8 @@ import ADTInterfaces.AbstractTreeInterface;
  * 
  * @param <T> the type the tree holds
  * @author BlueBowser
- * @see AbstractTreeInterface
+ * @see AbstractTree
  */
-public class Tree<T> implements {
+public class Tree<T> extends AbstractTree {
     
 }
