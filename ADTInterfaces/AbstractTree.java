@@ -10,14 +10,24 @@ import java.util.Iterator;
  * @param <T> the type that the tree holds
  * @author BlueBowser.
  */
-public abstract class AbstractTree<T> implements Iterable<T> {
+
+ //TODO: finish implementing AbstractTree and test it
+ //TODO: add methods that return Iterables so the user can iterate through the tree in any method they choose
+public abstract class AbstractTree<T> {
+    protected Node<T> head;
+    protected int size;
     /**
      * Internal node class which represents a node on the tree.
      * @param <T> the type the node holds.
+     * @author BlueBowser
      */
     protected static class Node<T> implements Position<T> {
+        /**The element the Node holds */
         T element;
+        /**The parent of the Node */
         Node<T> parent;
+        /**The children of the Node, as an ArrayList that has 
+         * Iterable<Node<T>>. */
         ArrayList<Node<T>> childs;
 
         /**
@@ -25,7 +35,7 @@ public abstract class AbstractTree<T> implements Iterable<T> {
          * @param elem the element the Node will hold. Must not be null.
          * @throws IllegalArgumentException if the element passed is null.
          */
-        pubilc Node(T elem) throws IllegalArgumentException {
+        public Node(T elem) throws IllegalArgumentException {
             if (elem == null) {
                 throw new IllegalArgumentException("node cannot hold a null value!");
             }
@@ -36,49 +46,67 @@ public abstract class AbstractTree<T> implements Iterable<T> {
         /**
          * @return the element stored by the Node.
          */
-        public T getElement() {}
+        public T getElement() {
+            return this.element;
+        }
 
         /**
          * Sets Node to hold a new element {@code elem}.
          * @param elem the new element to store in the Node. Must not be null.
          * @throws IllegalArgumentException if the elemenet passed is null.
          */
-        public void setElement(T elem) throws IllegalArgumentException {}
+        public void setElement(T elem) throws IllegalArgumentException {
+            if (elem == null) {
+                throw new IllegalArgumentException("element cannot be null!");
+            }
+        }
 
         /**
          * @return the parent of the Node.
          */
-        public Node<T> parent() {}
+        public Node<T> parent() {
+            return this.parent;
+        }
 
         /**
          * @param newParent the new parent to set to the Node.
          */
-        public void setParent(Node<T> newParent) {}
+        public void setParent(Node<T> newParent) {
+            this.parent = newParent;
+        }
 
         /**
+         * This method returns an ArrayList of all the children of the current
+         * Node. Using ArrayList funcitonality you can edit the ArrayList
+         * inside (like by using this.children.add(3) to add Integer(3) as a
+         * child.)
          * @return an ArrayList of all the children of the current Node.
          */
-        public ArrayList<Node<T>> children() {}
-        /**
-         * Adds a new node as a child of the current Node.
-         * @param node the child to be added to the Node. Must not be null.
-         * @throws IllegalArgumentException if the value is null.
-         */
-        public void addChild(Node<T> node) throws IllegalArgumentException {}
-        public Node<T> removeChild(Node<T> node) {}
+        public ArrayList<Node<T>> children() {
+            return this.childs;
+        }
+    }
+
+    public AbstractTree() {
+        this.head = null;
+        this.size = 0;
     }
     /**
      * The size of the tree.
      * @return the number of nodes in the tree
      */
-    public abstract int size();
+    public int size() {
+        return size;
+    }
 
     /**
      * Checks if the tree is empty.
      * @return {@code true} if the tree has no Nodes, {@code false}
      * otherwise.
      */
-    public abstract boolean isEmpty();
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
 
     /**
      * Returns the root's Position on the tree, returning null if the
@@ -86,7 +114,40 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @return a Position pointing to the root of the tree, or {@code null}
      * if the tree is empty.
      */
-    public abstract Position<T> root();
+    public Position<T> root() {
+        return this.position(this.head);
+    }
+
+    /**
+     * Turns a Node into a Position, returning null only in the case that the
+     * tree is empty.
+     * @param node the Node to turn into a Position
+     * @return a Position representing the Node.
+     */
+    protected Position<T> position(Node<T> node) {
+        return node;
+    }
+
+    /**
+     * Internal function used to validate a Position and turn it into a Node.
+     * A Position is invalid when its parent points back to the node.
+     * @param p Position to validate
+     * @return the Node that the Position was pointing to
+     * @throws IllegalArgumentException if p is invalid
+     */
+    protected Node<T> validate(Position<T> p) {
+        if (p == null) {
+            throw new IllegalArgumentException("The tree is empty!");
+        }
+        if (!(p instanceof Node)) {
+            throw new IllegalArgumentException("Invalid Position p!");
+        }
+        Node<T> node = (Node<T>) p;
+        if (node.parent() == node) {
+            throw new IllegalArgumentException("p is not in the tree anymore!");
+        }
+        return node;
+    }
 
     /**
      * Reuturns the position of the parent node of {@code p}, returning null
@@ -94,7 +155,9 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @param p the Position of a node
      * @return the parent of a node
      */
-    public abstract Position<T> parent(Position<T> p);
+    public Position<T> parent(Position<T> p) {
+        return this.position(this.validate(p).parent());
+    }
 
     /**
      * Returns an iterable collection of all the children of a node.
@@ -102,21 +165,30 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @return an object implementing Iterable that also contains the children
      * of the node at a Posiiton {@code p}
      */
-    public abstract Iterable<T> children(Position<T> p);
+    public Iterable children(Position<T> p) {
+        return this.validate(p).children();
+    }
 
     /**
      * Returns the number of children at a node.
      * @param p the Position of the node.
      * @return the number of childrena node has
      */
-    public abstract int numChilds(Position<T> p);
+    public int numChilds(Position<T> p) {
+        return this.validate(p).children().size();
+    }
 
     /**
      * Checks if a node is internal (that the node has at least one child).
      * @param p a Position of a node
      * @return {@code true} if the node is internal, {@code false} otherwise
      */
-    public abstract boolean isInternal(Position<T> p);
+    public boolean isInternal(Position<T> p) {
+        if (this.numChilds(p) > 0) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Checks whether the node is a leaf/external (that the node has no 
@@ -124,26 +196,18 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @param p a Position of a node
      * @return {@code true} if the node is a leaf, {@code false} otherwise
      */
-    public abstract boolean isLeaf(Position<T> p);
+    public boolean isLeaf(Position<T> p) {
+        return !isInternal(p);
+    }
 
     /**
      * Checks whether the node is a root node (it has no parent)
      * @param p the Position of a node
      * @return {@code true} if the Node is a root, {@code false} otherwise
      */
-    public abstract boolean isRoot(Position<T> p);
-
-    /**
-     * Iterates through all the elements in a tree in a breadth first traversal.
-     * @return an Iterator going through the tree in a breadth first traversal.
-     */
-    public Iterator<T> iterator();
-    /**
-     * Iterates through all the Positions of the tree ina breadth first
-     * traversal.
-     * @return an Iterator going through the tree in a breadth first traversal.
-     */
-    public Iterator<Position<T>> positions();
+    public boolean isRoot(Position<T> p) {
+        return this.validate(p).paretn() == null;
+    }
 
     /**
      * Returns the depth of a Node. The depth is how far the Node is from the
@@ -153,7 +217,13 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @param p the position of the Node
      * @return the depth of the node in the tree
      */
-    public int depth(Position<T> p);
+    public int depth(Position<T> p) {
+        if (this.isRoot(p)) {
+            return 0;
+        } else {
+            return 1 + depth(parent(p));
+        }
+    }
 
     /**
      * Returns the height of the tree. The height of a tree is the maximum depth
@@ -162,7 +232,7 @@ public abstract class AbstractTree<T> implements Iterable<T> {
      * @param p the Position of the Node
      * @return the height of the tree
      */
-    public int height();
+    public int height() {}
 
     /**
      * Returns an Iterator that iterates over the nodes in a preorder traversal,

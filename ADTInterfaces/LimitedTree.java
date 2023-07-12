@@ -8,6 +8,7 @@ package ADTInterfaces;
  * @author BlueBowser
  * @see AbstractTree for more info on the other methods.
  */
+//TODO: implement AbstractTree first
 public class LimitedTree<T> extends AbstractTree<T> {
     /**
      * Adds a child to the node at Position {@code parent}
