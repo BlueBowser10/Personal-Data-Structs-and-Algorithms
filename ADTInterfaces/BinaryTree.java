@@ -108,7 +108,11 @@ public class BinaryTree<T> {
 
         @Override
         public String toString() {
-            return this.elment.toString();
+            String par = (parent == null ? null : parent.getElement().toString());
+            String elem = (element == null ? null : element.toString());
+            String l = (left == null ? null : left.getElement().toString());
+            String r = (right == null ? null : right.getElement().toString());
+            return String.format("%s --> %s  (%s,  %s)", par, elem, l, r);
         }
     }
 
@@ -140,7 +144,7 @@ public class BinaryTree<T> {
      * if the tree is empty.
      */
     public Position<T> root() {
-        return this.position(this.head);
+        return this.head;
     }
 
     /**
@@ -317,6 +321,7 @@ public class BinaryTree<T> {
             throw new IllegalArgumentException("elem must not be null!");
         }
         this.head = new Node<>(elem);
+        ++this.size;
         return this.head;
     }
     /**
@@ -353,6 +358,7 @@ public class BinaryTree<T> {
             node.parent().setRight(null);
         }
         node.setParent(node);
+        --this.size;
         return lastElem;
     }
 
@@ -374,6 +380,7 @@ public class BinaryTree<T> {
         Node<T> newNode = new Node<>(elem);
         n.setLeft(newNode);
         newNode.setParent(n);
+        ++this.size;
         return newNode;
     }
 
@@ -395,6 +402,7 @@ public class BinaryTree<T> {
         Node<T> newNode = new Node<>(elem);
         n.setRight(newNode);
         newNode.setParent(n);
+        ++this.size;
         return newNode;
     }
 
@@ -418,6 +426,21 @@ public class BinaryTree<T> {
             node.setRight(right);
             left.setParent(node);
             right.setParent(node);
+            this.size += countChildren(left) + countChildren(right);
+        }
+    }
+
+    /**
+     * Recursive function which counts the number of children in a node. This
+     * is a function meant only for internal use.
+     * @param node the root of a tree whose nodes need to be counted
+     * @return the number of nodes in the subtree;
+     */
+    private int countChildren(Node<T> node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return 1 + countChildren(node.getLeft()) + countChildren(node.getRight());
         }
     }
 }
