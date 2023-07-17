@@ -13,6 +13,7 @@ import java.util.Iterator;
 
  //TODO: finish implementing AbstractTree and test it
  //TODO: add methods that return Iterables so the user can iterate through the tree in any method they choose
+ //FIXME: just implement a basic binary tree first, then focus on more general trees, please.
 public abstract class AbstractTree<T> {
     protected Node<T> head;
     protected int size;
