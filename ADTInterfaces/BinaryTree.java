@@ -154,6 +154,9 @@ public class BinaryTree<T> {
      * @return a Position representing the Node.
      */
     protected Position<T> position(Node<T> node) {
+        if (node.parent() == node) {
+            return null;
+        }
         return node;
     }
 
@@ -340,24 +343,42 @@ public class BinaryTree<T> {
         return lastElem;
     }
     /**
-     * Discards a node Position {@code p} from the tree, including all its
-     * descendants.
-     * @param p the Position of a certain node
+     * Discards a node Position {@code p} from the tree and pulls up its child
+     * in its place.
+     * @param p the Position of a certain node. Must have at most one child.
      * @return the element of the deleted node.
+     * @throws IllegalStateException if p has more than one child.
      */
-    public T delete(Position<T> p) {
+    public T remove(Position<T> p) {
         if (children(p).size() > 1) {
             throw new IllegalStateException("p has two children, it must have only one to be inserted into the list.");
         }
         T lastElem = p.getElement();
         Node<T> node = validate(p);
+        Node<T> child = (node.getLeft() == null ? node.getRight() : node.getLeft());
+
+        if (isRoot(node)) {
+            if (isLeaf(node)) {
+                this.head = null;
+            } else {
+                this.head = child;
+                child.setParent(null);
+            }
+            node.setParent(node);
+            node.setLeft(null);
+            node.setRight(null);
+            --this.size;
+            return lastElem;
+        }
 
         if (node.parent().getLeft() == node) {
-            node.parent().setLeft(null);
+            node.parent().setLeft(child);
         } else if (node.parent().getRight() == node) {
-            node.parent().setRight(null);
+            node.parent().setRight(child);
         }
         node.setParent(node);
+        node.setLeft(null);
+        node.setRight(null);
         --this.size;
         return lastElem;
     }
@@ -409,10 +430,10 @@ public class BinaryTree<T> {
     /**
      * Attaches two subtrees rooted at {@code l} and {@code r} to
      * a leaf node rooted at {@code pos}.
-     * @param 
-     * @param
-     * @param
-     * @throws
+     * @param pos the Position of a certain leaf node.
+     * @param l the subtree to be added to the left.
+     * @param r the subtree to be added at the right.
+     * @throws IllegalStateException if p is not a leaf
      */
     public void attach(Position<T> pos, Position<T> l, Position<T> r) {
         if (!isLeaf(pos)) {
