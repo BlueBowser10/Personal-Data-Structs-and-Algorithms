@@ -4,5 +4,6 @@
 # ignore all markdown files
 *.md
 
-# ignore the TestDriver 
+# ignore the Tests
 TestDriver.java
+TestFunctions.java

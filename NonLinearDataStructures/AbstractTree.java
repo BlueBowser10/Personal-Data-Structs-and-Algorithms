@@ -1,7 +1,9 @@
-package ADTInterfaces;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import ADTInterfaces.Position;
 
 /**
  * An abstract class describing the operations that can be done by the Tree

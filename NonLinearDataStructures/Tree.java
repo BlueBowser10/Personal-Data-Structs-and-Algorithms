@@ -1,7 +1,6 @@
 import java.util.Iterator;
 
 import ADTInterfaces.Position;
-import ADTInterfaces.AbstractTreeInterface;
 
 /**
  * This implements a Tree ADT. A tree is a linked node structure where there is

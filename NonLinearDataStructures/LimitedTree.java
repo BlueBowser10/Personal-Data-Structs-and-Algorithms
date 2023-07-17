@@ -1,4 +1,6 @@
-package ADTInterfaces;
+
+
+import ADTInterfaces.Position;
 
 /**
  * This imterface describes the behavior of a very general Tree with no
