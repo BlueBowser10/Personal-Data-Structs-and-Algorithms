@@ -11,7 +11,7 @@ import ADTInterfaces.Position;
  * @see AbstractTree for more info on the other methods.
  */
 //TODO: implement AbstractTree first
-public class LimitedTree<T> extends AbstractTree<T> {
+public class LimitedTree<T> {
     /**
      * Adds a child to the node at Position {@code parent}
      * containing the element {@code elem}.
