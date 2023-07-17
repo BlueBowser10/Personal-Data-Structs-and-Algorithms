@@ -105,6 +105,11 @@ public class BinaryTree<T> {
         public void setRight(Node<T> right) {
             this.right = right;
         }
+
+        @Override
+        public String toString() {
+            return this.elment.toString();
+        }
     }
 
     public BinaryTree() {
