@@ -244,10 +244,29 @@ public class Tree<T> {
         Queue<Position<T>> rootStack = new Queue<Position<T>>();
         rootStack.enqueue(position(root));
         nodeStack.push(rootStack);
+        //while the queue isnt empty
         while(!nodeStack.isEmpty()) {
+            //summon the queue from the top of the stack
             Queue<Position<T>> nodeQue = nodeStack.top();
-            for (Position<T> node : nodeQue)
+            //if the layer is empty, pop the layer and start over again
+            if (nodeQue.isEmpty()) {
+                nodeStack.pop();
+                continue;
+            }
+            //look at the front element
+            Position<T> node = nodeQue.dequeue();
+            //if the node is internal, then make a new queue, push its children, and add it on top of the stack
+            if (isInternal(node)) {
+                Queue<Position<T>> q = new Queue<>();
+                for (Position<T> child : children(node)) {
+                    q.enqueue(child);
+                }
+                nodeStack.push(q);
+            }
+            //compare the size of the stack. if the size is greater than the maxdepth, then update it
+            maxDep = (nodeStack.size() - 1 > maxDep ? nodeStack.size() - 1 : maxDep);
         }
+        return maxDep;
     }
 
     /**
@@ -257,7 +276,7 @@ public class Tree<T> {
      * doing an action to it, and then visiting each of tis children.
      * @return an Iterator iterating over the tree in a preorder fashion
      */
-    public Iterator<T> preorder();
+    public void preorder() {};
 
     /**
      * Returns an Iterator that iterates over the nodes in a post traversal,
@@ -268,7 +287,7 @@ public class Tree<T> {
      * Top down, going deeper when necessary and moving onto the next node.
      * @return an Iterator iterating over the tree in a preorder fashion
      */
-    public Iterator<T> postorder();
+    public void postorder() {};
 
     /**
      * Returns an Iterator that iterates over the nodes in a bredth-first
@@ -279,7 +298,7 @@ public class Tree<T> {
      * next level.
      * @return an Iterator iterating over the tree in a preorder fashion
      */
-    public Iterator<T> breadthFirst();
+    public void breadthFirst() {};
 
     /**
      * Returns an Iterator that iterates over the nodefs in a Euler Tour
@@ -290,7 +309,7 @@ public class Tree<T> {
      * at root.
      * @return
      */
-    public Iterator<T> eulerTour();
+    public void eulerTour() {};
 
     /**
      * Adds a root Node to an empty tree. It returns an error if the tree is not
@@ -298,19 +317,47 @@ public class Tree<T> {
      * @param elem the element to be added at the root
      * @throws IllegalStateException if the tree is not empty
      */
-    public Position<T> addRoot(T elem) throws IllegalStateException;
+    public Position<T> addRoot(T elem) throws IllegalStateException {
+        if (!isEmpty()) {
+            throw new IllegalStateException("The tree is not empty!");
+        }
+        if (elem == null) {
+            throw new IllegalArgumentException("Elem cannot be null!");
+        }
+        this.head = new Node<T>(elem);
+        ++this.size;
+        return this.head;
+    }
     /**
      * Sets the element located at Position {@code p} to {@code elem}
      * @param p Position of a certain node
      * @param elem the new element to store at the node
      * @return the last element stored at that Posiiton
      */
-    public T set(Position<T> p, T elem);
+    public T set(Position<T> p, T elem) {
+        if (elem == null) {
+            throw new IllegalArgumentException("Elem cannot be null!");
+        }
+        Node<T> node = validate(p);
+        T lastElem = node.getElement();
+        node.setElement(elem);
+        return lastElem;
+    }
     /**
-     * Discards a node Position {@code p} from the tree, including all its
-     * descendants.
+     * Discards a node Position {@code p} from the tree and hoisting up all the
+     * children below it.
      * @param p the Position of a certain node
      * @return the element of the deleted node.
      */
-    public T delete(Position<T> p);
+    public T remove(Position<T> p) {
+        Node<T> node = validate(p);
+        T lastElem = node.getElement();
+        Node<T> par = node.parent();
+        for (Position<T> child : children(node)) {
+            par.children().add(child);
+            ((Node<T>) child).setParent(par);
+        }
+        --this.size;
+        return lastElem;
+    }
 }

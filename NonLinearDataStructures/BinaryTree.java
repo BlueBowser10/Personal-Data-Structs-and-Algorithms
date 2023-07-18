@@ -1,6 +1,8 @@
-package ADTInterfaces;
+
 
 import java.util.ArrayList;
+
+import ADTInterfaces.Position;
 
 /**
  * This class implements a Binary Tree ADT. This is a more specific
