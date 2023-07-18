@@ -51,16 +51,14 @@ public interface SinglyLinkedList<T> {
 
     /**
      * Returns the first element in the list.
-     * @return the head element
-     * @throws NoSuchElementException when the list is empty
+     * @return the head element, or {@code null if the list is empty}
      */
-    public T first() throws NoSuchElementException;
+    public T first();
 
     /**
      * Returns the last element in the list.
      * 
-     * @return the tail element
-     * @throws NoSuchElementException when the list is empty
+     * @return the tail element, or {@code null} if the list is empty
      */
-    public T last() throws NoSuchElementException;
+    public T last();
 }

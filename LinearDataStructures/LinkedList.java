@@ -143,17 +143,17 @@ public class LinkedList<T> implements SinglyLinkedList<T>, Iterable<T> {
     }
 
     @Override
-    public T first() throws NoSuchElementException {
+    public T first() {
         if (this.isEmpty()) {
-            throw new NoSuchElementException("the list is empty!");
+            return null;
         }
         return this.head.getElement();
     }
 
     @Override
-    public T last() throws NoSuchElementException {
+    public T last() {
         if (this.isEmpty()) {
-            throw new NoSuchElementException("the list is empty!");
+            return null;
         }
         return this.tail.getElement();
     }

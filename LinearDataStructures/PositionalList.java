@@ -3,6 +3,7 @@ import java.util.NoSuchElementException;
 
 import ADTInterfaces.Position;
 import ADTInterfaces.PositionalListInterface;
+import java.util.Iterator;
 
 /**
  * This is an implementation of a Positional List ADT, a more abstract version 
@@ -14,7 +15,7 @@ import ADTInterfaces.PositionalListInterface;
  * @author BlueBowser
  * @see Position
  */
-public class PositionalList<T> implements PositionalListInterface<T> {
+public class PositionalList<T> implements PositionalListInterface<T>, Iterable<T> {
 
     /**Internal node class for the LinkedList */
     private static class Node<T> implements Position<T> {
@@ -163,10 +164,16 @@ public class PositionalList<T> implements PositionalListInterface<T> {
 
     @Override
     public Position<T> first() {
+        if (this.isEmpty()) {
+            return null;
+        }
         return this.position(HEAD.next());
     }
     @Override
     public Position<T> last() {
+        if (this.isEmpty()) {
+            return null;
+        }
         return this.position(TAIL.prev());
     }
     @Override
@@ -332,5 +339,14 @@ public class PositionalList<T> implements PositionalListInterface<T> {
         if (a == HEAD) {
             a.setPrev(b);
         }
+    }
+
+    /**
+     * Returns an Iterator object which iterates through all the Positions
+     * in the PositionalList.
+     * @return an Iterator.
+     */
+    public Iterator<T> iterator() {
+        return new PositionalListIterator<T>(this);
     }
 }

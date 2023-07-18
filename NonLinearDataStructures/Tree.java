@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import ADTInterfaces.Position;
 import LinearDataStructures.Stack;

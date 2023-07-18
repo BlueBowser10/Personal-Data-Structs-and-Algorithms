@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import ADTInterfaces.DoublyLinkedLIstInterface;
-import ADTInterfaces.SinglyLinkedList;
+
 
 /**
  * This implements a Doubly Linked List ADT, where nodes link the next nodes and previous nodes. This approach uses two dummy DoubleNodes at the beginning and the end to make thins a lot easier to implement.
@@ -138,9 +138,9 @@ public class DoublyLinkedList<T> implements DoublyLinkedLIstInterface<T>, Iterab
     }
 
     @Override
-    public T first() throws NoSuchElementException {
+    public T first() {
         if (this.isEmpty()) {
-            throw new NoSuchElementException("the list is empty!");
+            return null;
         }
         return HEAD.next().getElement();
     }
@@ -148,7 +148,7 @@ public class DoublyLinkedList<T> implements DoublyLinkedLIstInterface<T>, Iterab
     @Override
     public T last() throws NoSuchElementException {
         if (this.isEmpty()) {
-            throw new NoSuchElementException("the list is empty!");
+            return null;
         }
         return TAIL.prev().getElement();
     }
