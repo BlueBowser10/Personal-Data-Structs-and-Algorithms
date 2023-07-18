@@ -3,6 +3,7 @@ import java.util.Iterator;
 
 import ADTInterfaces.Position;
 import LinearDataStructures.Stack;
+import LinearDataStructures.Queue;
 
 /**
  * An class describing the operations that can be done by the Tree
@@ -237,27 +238,16 @@ public class Tree<T> {
      * @return the height of the tree
      */
     public int height(Position<T> p) {
-        int dep = 0;
-        int run = 0;
-        Node<T> starter = validate(p);
-        Stack<Position<T>> nodeStack = new Stack<>();
-        nodeStack.push(starter);
-        while (!nodeStack.isEmpty()) {
-            Position<T> cur = nodeStack.top();
-            if (isInternal(cur)) {
-                for (Position<T> child : children(cur)) {
-                    nodeStack.push(child);
-                }
-                ++run;
-            } else {
-                while(isLeaf(nodeStack.top())) {
-                    nodeStack.pop();
-                }
-                --run;
-            }
-            dep = Math.max(dep, run);
+        int maxDep = 0;
+        Node<T> root = validate(p);
+        Stack<Queue<Position<T>>> nodeStack = new Stack<>();
+        Queue<Position<T>> rootStack = new Queue<Position<T>>();
+        rootStack.enqueue(position(root));
+        nodeStack.push(rootStack);
+        while(!nodeStack.isEmpty()) {
+            Queue<Position<T>> nodeQue = nodeStack.top();
+            for (Position<T> node : nodeQue)
         }
-        return dep;
     }
 
     /**
