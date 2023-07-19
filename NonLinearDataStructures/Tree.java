@@ -356,6 +356,8 @@ public class Tree<T> {
             par.children().add(child);
             ((Node<T>) child).setParent(par);
         }
+        node.setParent(node);
+        node.children().clear();
         --this.size;
         return lastElem;
     }
