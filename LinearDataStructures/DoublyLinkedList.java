@@ -146,7 +146,7 @@ public class DoublyLinkedList<T> implements DoublyLinkedLIstInterface<T>, Iterab
     }
 
     @Override
-    public T last() throws NoSuchElementException {
+    public T last() {
         if (this.isEmpty()) {
             return null;
         }

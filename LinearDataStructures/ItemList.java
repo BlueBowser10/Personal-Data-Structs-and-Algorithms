@@ -1,5 +1,6 @@
 package LinearDataStructures;
 import ADTInterfaces.ListInterface;
+import java.util.Iterator;
 
 /**
  * This is an implementation of the List ADT. It uses a doubly linked
@@ -7,7 +8,7 @@ import ADTInterfaces.ListInterface;
  * @param <T> the type that the list holds
  * @author BlueBowser
  */
-public class ItemList<T> implements ListInterface<T> {
+public class ItemList<T> implements ListInterface<T>, Iterable<T> {
     /**The doubly linked list that is the backbone of the list.*/
     private DoublyLinkedList<T> list;
 
@@ -70,4 +71,7 @@ public class ItemList<T> implements ListInterface<T> {
         return this.list.equals(other.list);
     }
     
+    public Iterator<T> iterator() {
+        return this.list.iterator();
+    }
 }

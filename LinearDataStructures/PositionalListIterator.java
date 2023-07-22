@@ -2,6 +2,12 @@ package LinearDataStructures;
 import java.util.Iterator;
 import ADTInterfaces.Position;
 
+/**
+ * An Iterator for iterating through the Positions of a PositionalList.
+ * @param <T> the type the Iterator holds
+ * @author BlueBowser
+ * @see PositionalList
+ */
 public class PositionalListIterator<T> implements Iterator<T> {
     PositionalList<T> list;
     Position<T> pointer;
