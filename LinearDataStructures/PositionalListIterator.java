@@ -15,13 +15,18 @@ public class PositionalListIterator<T> implements Iterator<T> {
         this.list = list;
         pointer = this.list.first();
     }
+    @Override
     public boolean hasNext() {
         if (list.after(pointer) == null) {
             return false;
         }
         return true;
     }
+    @Override
     public T next() {
+        if (pointer == null) {
+            throw new IllegalStateException("No more positions to iterate over.");
+        }
         T lastElem = pointer.getElement();
         pointer = list.after(pointer);
         return lastElem;
