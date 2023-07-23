@@ -118,7 +118,7 @@ public class PositionalList<T> implements PositionalListInterface<T>, Iterable<T
     
         @Override
         public String toString() {
-            return prev.getElement() + " <-- " + this.data + " --> " + next.getElement();
+            return data.toString();
         }
     }
 
