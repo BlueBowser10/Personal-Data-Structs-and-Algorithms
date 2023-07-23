@@ -44,9 +44,9 @@ public class Stack<T> implements StackInterface<T> {
     }
 
     @Override
-    public T top() throws NoSuchElementException {
+    public T top() {
         if (this.isEmpty()) {
-            throw new NoSuchElementException("the stack is empty!");
+            return null;
         }
         return this.pile.first();
     }

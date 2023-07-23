@@ -39,8 +39,7 @@ public interface StackInterface<T> {
 
     /**
      * Looks at the top element on the stack.
-     * @return the top element on the stack
-     * @throws NoSuchElementException if the list is empty
+     * @return the top element on the stack, or null if the stack is empty.
      */
-    public T top() throws NoSuchElementException;
+    public T top();
 }

@@ -9,7 +9,7 @@ import ADTInterfaces.CircularlyLinkedListInterface;
  * to the head Node.
  * @param <T> the type that the list holds
  */
-public class CircularyLinkedList<T> implements CircularlyLinkedListInterface<T>, Iterable<T> {
+public class CircularlyLinkedList<T> implements CircularlyLinkedListInterface<T>, Iterable<T> {
     /**
      * An iterator for the CirculalyLinkedList. This inner class can help to
      * iterate through the list, starting from head to tail.
@@ -75,7 +75,7 @@ public class CircularyLinkedList<T> implements CircularlyLinkedListInterface<T>,
     private int size;
 
     /** Default constructor for a circularly linked list. */
-    public CircularyLinkedList() {
+    public CircularlyLinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
@@ -107,7 +107,7 @@ public class CircularyLinkedList<T> implements CircularlyLinkedListInterface<T>,
             this.head = node;
         }
 
-        ++this.size;
+        this.size++;
     }
 
     @Override
@@ -207,10 +207,10 @@ public class CircularyLinkedList<T> implements CircularlyLinkedListInterface<T>,
         if (this == o) {
             return true;
         }
-        if (!(o instanceof CircularyLinkedList)) {
+        if (!(o instanceof CircularlyLinkedList)) {
             return false;
         }
-        CircularyLinkedList other = (CircularyLinkedList) o;
+        CircularlyLinkedList other = (CircularlyLinkedList) o;
         if (other.size != this.size) {
             return false;
         }
