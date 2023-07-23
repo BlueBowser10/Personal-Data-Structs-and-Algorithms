@@ -1,6 +1,7 @@
 import LinearDataStructures.*;
 
 public class TestFunctions {
+    /*/
     public static void testLinkedList () {
         System.out.println("Testing Singularly Linked List...\n===============================================\n\n\n");
         System.out.println("Creating linked list...");
@@ -370,5 +371,55 @@ public class TestFunctions {
         System.out.println(a);
         System.out.println(a.first());
         
+    }
+    */
+    
+    public static void testDeque() {
+        System.out.println("Testing Queue...\n===============================================\n\n\n");
+        System.out.println("(relies on LinkedList Test, so as long as Stack implemented right, fewer things to check)");
+        System.out.println("Creating queue...");
+        Deque<Integer> a = new Deque<>();
+        System.out.println(a);
+
+        System.out.println("push to front");
+        System.out.println("before: " + a);
+        a.pushFront(1); a.pushFront(2); a.pushFront(3);
+        System.out.println("after: " + a);
+        System.out.println(a.first() + " " + a.last());
+
+
+        System.out.println("push to back");
+        System.out.println("before: " + a);
+        a.pushBack(6); a.pushBack(5); a.pushBack(4);
+        System.out.println("after: " + a);
+        System.out.println(a.first() + " " + a.last());
+
+        System.out.println("pop from front");
+        System.out.println("before: " + a);
+        System.out.println(a.popFront());
+        System.out.println("after: " + a);
+
+        System.out.println("pop from back");
+        System.out.println("before: " + a);
+        System.out.println(a.first() + " " + a.last());
+        System.out.println(a.popBack());
+        System.out.println("after: " + a);
+        System.out.println(a.first() + " " + a.last());
+
+
+        a = new Deque<>();
+
+        System.out.println("pop from front when empty (should throw error)");
+        try {
+            a.popFront();
+        } catch (Exception e) {
+            System.out.println(e + "\nerror caught");
+        }
+        System.out.println("pop from back when empty (should throw error)");
+        try {
+            a.popFront();
+        } catch (Exception e) {
+            System.out.println(e + "\nerror caught");
+        }
     }
 }
