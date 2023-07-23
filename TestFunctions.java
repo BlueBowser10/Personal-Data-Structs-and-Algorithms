@@ -372,8 +372,7 @@ public class TestFunctions {
         System.out.println(a.first());
         
     }
-    */
-    
+
     public static void testDeque() {
         System.out.println("Testing Queue...\n===============================================\n\n\n");
         System.out.println("(relies on LinkedList Test, so as long as Stack implemented right, fewer things to check)");
@@ -421,5 +420,45 @@ public class TestFunctions {
         } catch (Exception e) {
             System.out.println(e + "\nerror caught");
         }
+    }
+    */
+    public static void testItemList() {
+        System.out.println("Testing List...\n===========================================================");
+        System.out.println("(dep on DoublyLinkedList)\n\n\n");
+        print("creating item list");
+        ItemList<Integer> a = new ItemList<>();
+
+        print("default add last");
+        print("before: " + a);
+        a.add(1);
+        print("after: " + a);
+
+        print("add -1 at atart");
+        print("before: " + a);
+        a.add(0, -1);
+        print("after: " + a);
+
+        print("add 5 at i=1 (middle)");
+        print("before: " + a);
+        a.add(1, 5);
+        print("after: " + a);
+
+        print("add 8 at end");
+        print("before: " + a);
+        a.add(a.size() - 1, 8);
+        print("after: " + a);
+
+        print("get item at i=3");
+        print("list: " + a);
+        print(a.get(3));
+
+        print("remove item at i=2");
+        print("before: " + a);
+        print(a.remove(2));
+        print("after: " + a);
+    }
+
+    public static void print(Object s) {
+        System.out.println(s.toString());
     }
 }
