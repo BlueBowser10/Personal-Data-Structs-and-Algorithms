@@ -305,6 +305,70 @@ public class TestFunctions {
     }
 
     public static void testStack() {
+        System.out.println("Testing Stack...\n===============================================\n\n\n");
+        System.out.println("(relies on LinkedLis tTest, so as long as Stack implemented right, fewer things to check)");
+        System.out.println("Creating new stack...");
+        Stack<Integer> a = new Stack<>();
+        System.out.println(a);
+
+        System.out.println("Top of empty stack is null");
+        System.out.println(a);
+        System.out.println(a.top());
+
+        System.out.println("Push elems to stack");
+        System.out.println("before: " + a);
+        a.push(3); a.push(5); a.push(18);
+        System.out.println(a);
+
+        System.out.println("Top of stack");
+        System.out.println(a);
+        System.out.println(a.top());
+
+        System.out.println("Pop from nonempty stack");
+        System.out.println("before: " + a);
+        System.out.println(a.pop());
+        System.out.println("after: " + a);
+
+        System.out.println("Pop from empty stack (should throw error)");
+        a = new Stack<>();
+        try {
+            System.out.println(a.pop());
+        } catch (Exception e) {
+            System.out.println(e + "\nerror caught!");
+        }
+    }
+
+    public static void testQueue() {
+        System.out.println("Testing Queue...\n===============================================\n\n\n");
+        System.out.println("(relies on LinkedList Test, so as long as Stack implemented right, fewer things to check)");
+        System.out.println("Creating queue");
+        Queue<Integer> a = new Queue<>();
+        System.out.println(a);
+
+        System.out.println("Dequeueing from empty (should throw an error)");
+        try {
+            System.out.println(a.dequeue());
+        } catch (Exception e) {
+            System.out.println(e + "\nerror caught!");
+        }
+
+        System.out.println("First elem of empty queue (should be null)");
+        System.out.println(a);
+        System.out.println(a.first());
+
+        System.out.println("Enqueing...");
+        System.out.println("before: " + a);
+        a.enqueue(1); a.enqueue(2); a.enqueue(3);
+        System.out.println("after: " + a);
+
+        System.out.println("Dequeueing from nonempty...");
+        System.out.println("before: " + a);
+        System.out.println(a.dequeue());
+        System.out.println("after: " + a);
+
+        System.out.println("First element of a nonempty queue.");
+        System.out.println(a);
+        System.out.println(a.first());
         
     }
 }

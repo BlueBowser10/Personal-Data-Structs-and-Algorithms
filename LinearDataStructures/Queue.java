@@ -43,7 +43,7 @@ public class Queue<T> implements QueueInterface<T> {
     }
 
     @Override
-    public T first() throws NoSuchElementException {
+    public T first() {
         return this.list.first();
     }
 
