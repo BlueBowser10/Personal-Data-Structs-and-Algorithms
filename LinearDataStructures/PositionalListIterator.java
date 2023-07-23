@@ -17,7 +17,7 @@ public class PositionalListIterator<T> implements Iterator<T> {
     }
     @Override
     public boolean hasNext() {
-        if (list.after(pointer) == null) {
+        if (list.isEmpty() || (list.after(pointer) == null)) {
             return false;
         }
         return true;

@@ -1,4 +1,5 @@
 import LinearDataStructures.*;
+import ADTInterfaces.Position;
 
 public class TestFunctions {
     /*/
@@ -428,6 +429,12 @@ public class TestFunctions {
         print("creating item list");
         ItemList<Integer> a = new ItemList<>();
 
+        print("Testing empty iterator...");
+        print(a);
+        for (Integer integer : a) {
+            print(integer);
+        }
+
         print("default add last");
         print("before: " + a);
         a.add(1);
@@ -456,6 +463,87 @@ public class TestFunctions {
         print("before: " + a);
         print(a.remove(2));
         print("after: " + a);
+
+        a.add(23);
+        a.add(47);
+        a.add(89);
+        
+        print("testing nonempty iterator...");
+        print("list: " + a);
+        for (Integer integer : a) {
+            print(integer);
+        }
+        
+    }
+
+    public static void testPositionalList() {
+        print("Testing Posiitonal List...\n=============================================");
+        print("creating positional list...");
+        PositionalList<Integer> a = new PositionalList<>();
+
+        System.out.println(a);
+        print("add 1 to front...");
+        print("before: " + a);
+        print(a.addFirst(1));
+        print("after: " + a);
+        print(a.first() + " " + a.last());
+
+        print("add 2 to back...");
+        print("before: " + a);
+        print(a.addLast(2));
+        print("after: " + a);
+        print(a.first() + " " + a.last());
+
+        print("add a few more...");
+        print("before: " + a);
+        a.addLast(3); a.addFirst(10); a.addLast(30);
+        print("after: " + a);
+        
+        print("get position");
+        Position<Integer> pos = a.first();
+        print("first: " + pos);
+
+        print("advance pos to test...");
+        pos = a.after(pos);
+        print("pos is now: " + pos);
+
+        print("position navigation:");
+        print("before pos is: " + a.before(pos));
+        print("after pos is " + a.after(pos));
+
+        print("add 18 before position with element " + pos.getElement());
+        print("before: " + a);
+        a.addBefore(pos, 18);
+        print("after: " + a);
+
+        
+        print("add 26 after position with element " + pos.getElement());
+        print("before: " + a);
+        a.addAfter(pos, 26);
+        print("after: " + a);
+
+        print("remove position and try to add (should throw error)");
+        print("before: " + a);
+        print(a.remove(pos));
+        print("after: " + a);
+        try {
+            a.addAfter(pos, 45);
+        } catch (Exception e) {
+            print(e + "\nerror caught!");
+        }
+
+        print("test nonempty iterator...");
+        print(a);
+        for (Integer integer : a) {
+            print(integer);
+        }
+        
+        print("test empty iterator...");
+        a = new PositionalList<>();
+        print(a);
+        for (Integer integer : a) {
+            print(integer);
+        }
     }
 
     public static void print(Object s) {
