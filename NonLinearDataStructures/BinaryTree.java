@@ -437,37 +437,31 @@ public class BinaryTree<T> {
      * @param r the subtree to be added at the right.
      * @throws IllegalStateException if p is not a leaf
      */
-    public void attach(Position<T> pos, Position<T> l, Position<T> r) {
+    public void attach(Position<T> pos, BinaryTree<T> l, BinaryTree<T> r) {
         if (!isLeaf(pos)) {
             throw new IllegalStateException("the Position is not a leaf!");
         } else {
             Node<T> node = validate(pos);
-            Node<T> left = validate(l);
-            Node<T> right = validate(r);
-            
-            node.setLeft(left);
-            node.setRight(right);
-            left.setParent(node);
-            right.setParent(node);
-            this.size += countChildren(left) + countChildren(right);
-        }
-    }
-
-    /**
-     * Recursive function which counts the number of children in a node. This
-     * is a function meant only for internal use.
-     * @param node the root of a tree whose nodes need to be counted
-     * @return the number of nodes in the subtree;
-     */
-    private int countChildren(Node<T> node) {
-        if (node == null) {
-            return 0;
-        } else {
-            return 1 + countChildren(node.getLeft()) + countChildren(node.getRight());
+            if (!l.isEmpty()) {
+                Node<T> left = validate(l.root());
+                node.setLeft(left);
+                left.setParent(node);
+                this.size += l.size();
+                l.head = null;
+                l.size = 0;
+            }
+            if (!r.isEmpty()) {
+                Node<T> right = validate(r.root());
+                node.setRight(right);
+                right.setParent(node);
+                this.size += r.size();
+                r.head = null;
+                r.size = 0;
+            }
         }
     }
 
     public String toString() {
-        return super.toString() + " (" + this.size + ")";
+        return super.toString() + " (" + this.size + ")"; 
     }
 }
