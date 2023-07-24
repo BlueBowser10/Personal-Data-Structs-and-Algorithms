@@ -466,4 +466,8 @@ public class BinaryTree<T> {
             return 1 + countChildren(node.getLeft()) + countChildren(node.getRight());
         }
     }
+
+    public String toString() {
+        return super.toString() + " (" + this.size + ")";
+    }
 }
