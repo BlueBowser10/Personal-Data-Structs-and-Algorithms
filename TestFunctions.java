@@ -1,8 +1,9 @@
 import LinearDataStructures.*;
 import ADTInterfaces.Position;
+import NonLinearDataStructures.*;
 
 public class TestFunctions {
-    /*/
+    
     public static void testLinkedList () {
         System.out.println("Testing Singularly Linked List...\n===============================================\n\n\n");
         System.out.println("Creating linked list...");
@@ -96,7 +97,6 @@ public class TestFunctions {
         System.out.println(a);
 
         System.out.println("Adding to front when empty...");
-        //TODO: fix error bug when printin out a circularly linked list of size 1
         a.addFirst(1);
         System.out.println(a.first() + " " + a.last());
         System.out.println(a);
@@ -422,7 +422,7 @@ public class TestFunctions {
             System.out.println(e + "\nerror caught");
         }
     }
-    */
+    
     public static void testItemList() {
         System.out.println("Testing List...\n===========================================================");
         System.out.println("(dep on DoublyLinkedList)\n\n\n");
@@ -525,6 +525,7 @@ public class TestFunctions {
         print("remove position and try to add (should throw error)");
         print("before: " + a);
         print(a.remove(pos));
+        print("removed position: " + pos);
         print("after: " + a);
         try {
             a.addAfter(pos, 45);
@@ -546,7 +547,174 @@ public class TestFunctions {
         }
     }
 
+    public static void testBinaryTree() {
+        print("Testing Binary Tree...\n==================================================");
+        print("(this is a lot but worth it)");
+        print("creating binary tree...");
+        BinaryTree<Integer> tree = new BinaryTree<Integer>();
+        print(tree.root());
+
+        print();
+        print("accessing empty root (should be null)");
+        print(tree.root());
+
+        print();
+        print("try adding a root 1 to an empty tree");
+        tree.addRoot(1);
+        print(tree);
+        Position<Integer> root = tree.root();
+        print("root position: " + root);
+
+        print();
+        print("add left 2 and right 3, empty and nonempty");
+        Position<Integer> l = tree.addLeft(root, 2);
+        Position<Integer> r = tree.addRight(root, 3);
+
+        print("tree: " + tree);
+        print("root: " + root);
+        print("left: " + l);
+        print("right: " + r);
+
+        print();
+        print("try to add to root's left and right (should throw error)");
+        try {
+            tree.addLeft(root, 4);
+        } catch (Exception e) {
+            print(e + "\ncannot add left, error caught!");
+        }
+
+        try {
+            tree.addRight(root, 5);
+        } catch (Exception e) {
+            print(e + "\ncannot add right, error caught!");
+        }
+
+        print();
+        print("test navigation...");
+        print("parent of left (should be root): " + tree.parent(l));
+        print("children of root: " + tree.children(root));
+        print("left of root:" + tree.left(root));
+        print("right of root: " + tree.right(root));
+
+        print();
+        print("set a new value on left to 55");
+        print("before, left was: " + l);
+        print("last val was " + tree.set(l, 55));
+        print("new val: " + l);
+
+        print();
+        print("remove positions and test for invalid positions");
+        print("removing root...(should throw an error)");
+        try {
+            tree.remove(root);
+        } catch (Exception e) {
+            print(e + "\nerror caught");
+        }
+
+        print();
+        print("adding 5 to left branch...");
+        Position<Integer> deleted = tree.addLeft(l, 5);
+
+        print();
+        print("removing...");
+        print("before: " + l);
+        tree.remove(deleted);
+        print("after: " + l);
+
+        print();
+        print("removing point root");
+        BinaryTree<Integer> pointRoot = new BinaryTree<>();
+        Position<Integer> point = pointRoot.addRoot(5);
+        print("tree: " + pointRoot);
+        print("before: " + point);
+        pointRoot.remove(point);
+        print("after: " + point);
+        print("after tree: " + pointRoot);
+
+        point = pointRoot.addRoot(5);
+        Position<Integer> point2 = pointRoot.addRight(point, 10);
+
+        print();
+        print("now removing from a binary linked list...");
+        print("tree: " + pointRoot);
+        print("before: " + point);
+        pointRoot.remove(point);
+        print("after: " + point);
+        print("after tree: " + pointRoot);
+        print("after root: " + pointRoot.root());
+
+        print();
+        print("testing for invalid positions...");
+        try {
+            pointRoot.addLeft(point, 20);
+        } catch (Exception e) {
+            print(e + "\nerror caught!");
+        }
+
+        print();
+        print("test the depth and height functions for empty, unbalanced, and full trees...");
+        /*
+         * I will do this tree
+         * a 
+         *     c            d
+         *  e      g        |
+         *                  h
+         *              i      k
+         */
+        BinaryTree<Integer> dTree = new BinaryTree<>();
+        root = dTree.addRoot(1);
+        dTree.addLeft(dTree.root(), 1);
+        dTree.addRight(dTree.root(), 1);
+
+        dTree.addLeft(dTree.left(dTree.root()), 1);
+        dTree.addRight(dTree.left(dTree.root()), 1);
+
+        Position<Integer> internal = dTree.addRight(dTree.right(dTree.root()), 1);
+
+        dTree.addRight(dTree.right(dTree.right(dTree.root())), 1);
+        Position<Integer> leaf = dTree.addLeft(dTree.right(dTree.right(dTree.root())), 1);
+
+        print("depth of root: " +dTree.depth(root));
+        print("depth of internal node h: " +dTree.depth(internal));
+        print("depth of leaf node i: " +dTree.depth(leaf));
+
+        print("height of tree: " + dTree.height(root));
+        print("height of tree at an internal node h: " + dTree.height(internal));
+        print("height of tree at a leaf: " + dTree.height(leaf));
+
+        print();
+        print("create two new binary trees and try to attach their roots...");
+        print("tree1: " + tree);
+        BinaryTree<Integer> tree2 = new BinaryTree<Integer>();
+        tree2.addRoot(4);
+        tree2.addLeft(tree2.root(), 5);
+        tree2.addRight(tree2.root(), 6);
+        print("tree2: " + tree);
+
+        BinaryTree<Integer> linker = new BinaryTree<Integer>();
+        print("linker tree: " + linker);
+        linker.addRoot(1);
+        linker.attach(linker.root(), tree, tree2);
+        print("new tree (should have 7 nodes...): " + linker);
+
+        Queue<Position<Integer>> q = new Queue<>();
+        q.enqueue(linker.root());
+        while (!q.isEmpty()) {
+            Position<Integer> p = q.dequeue();
+            print(p.getElement());
+            if (linker.children(p).size() > 0) {
+                for (Position<Integer> child : linker.children(p)) {
+                    q.enqueue(child);
+                }
+            }
+        }
+    }
+
     public static void print(Object s) {
-        System.out.println(s.toString());
+        System.out.println(s);
+    }
+
+    public static void print() {
+        System.out.println();
     }
 }
