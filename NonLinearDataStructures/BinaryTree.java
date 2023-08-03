@@ -1,4 +1,4 @@
-
+package NonLinearDataStructures;
 
 import java.util.ArrayList;
 
@@ -420,7 +420,7 @@ public class BinaryTree<T> {
         }
         Node<T> n = validate(p);
         if (n.getRight() != null) {
-            throw new IllegalStateException("p already has a left child.");
+            throw new IllegalStateException("p already has a right child.");
         }
         Node<T> newNode = new Node<>(elem);
         n.setRight(newNode);
