@@ -1,10 +1,6 @@
 package NonLinearDataStructures;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import ADTInterfaces.Position;
-import LinearDataStructures.Deque;
 import LinearDataStructures.Queue;
 
 /**
@@ -15,48 +11,33 @@ import LinearDataStructures.Queue;
 */
 public class TreeIterator<E> {
 
-    /**Where to start iterating from in tree. */
-    private Position<E> marker;
-    
-    /**
-     * Gets the position where the Tree is going to start iterating.
-     */
-    public Position<E> getMarker() {
-        return marker;
-    }
-
-    /**
-     * Sets the position that the tree will start iterating at.
-     * @param marker
-     */
-    public void setMarker(Position<E> marker) {
-        this.marker = marker;
-    }
-
-
     /**The tree containing the position */
     private BinaryTree<E> tree;
 
-    /**A queue that will be constructed based on traversal called.
-     * It will initially be empty.
+    /**A queue that will be constructed based on the traversal method.
+     * It will hold all the Positions in the subtree iterated by the 
+     * iterator method. It will be overwritten with new methods after
+     * each method call.
      */
-    private Queue<E> iteratorQue;
+    private Queue<Position<E>> iteratorQue;
 
     /**
      * Construsts a TreeIterator object with an empty Queue
-     * @param marker
-     * @param tree
-     * @param mode
+     * @param tree the main Binary Tree the iterator will be working on.
      */
-    public TreeIterator(Position<E> marker, BinaryTree<E> tree, TreeIteratorEnum mode) {
-        iteratorQue = new Queue<>();
-        this.marker = marker;
+    public TreeIterator(BinaryTree<E> tree) {
+        this.iteratorQue = new Queue<>();
         this.tree = tree;
     }
 
-    public Queue<E> preorder() {
+    /**
+     * Returns a preorder transversal. A preorder transversal is one where
+     * the parent nodes are acessed before the child nodes.
+     * @return a Queue containing the Positions of the Nodes to iterate over.
+     */
+    public Queue<Position<E>> preorder(Position<E> marker) {
         emptyQueue();
-        preorder(marker);
+        preorderInt(marker);
         return iteratorQue;
     }
 
@@ -64,55 +45,120 @@ public class TreeIterator<E> {
      * Internal helper method for calling a preorder iterator.
      * @param node the recursive node to iterate on. Will stop 
      */
-    private void preorder(Position<E> node) {
-        iteratorQue.enqueue(node.getElement());
+    private void preorderInt(Position<E> node) {
+        iteratorQue.enqueue(node);
         if (tree.children(node).size() > 0) {
             for (Position<E> child : tree.children(node)) {
-                preorder(child);
+                preorderInt(child);
             }
         }
     }
 
-    public Queue<E> postorder() {
-        postorder(marker);
+    /**
+     * Returns a preorder transversal. A preorder transversal is one where
+     * the child nodes are acessed before the parent nodes.
+     * @param marker the Position to start iterating at
+     * @return a Queue containing the Positions of the Nodes to iterate over.
+     */
+    public Queue<Position<E>> postorder(Position<E> marker) {
+        emptyQueue();
+        postorderInt(marker);
         return iteratorQue;
     }
 
-    private void postorder(Position<E> pos) {
+    /**
+     * Internal method for postorder iteration.
+     * @param pos recursive node to iterate over.
+     */
+    private void postorderInt(Position<E> pos) {
         if (tree.children(pos).size() > 0) {
             for (Position<E> child : tree.children(pos)) {
-                preorder(child);
+                postorderInt(child);
             }
         }
-        iteratorQue.enqueue(pos.getElement());
+        iteratorQue.enqueue(pos);
     }
 
-    public Queue<E> inorder() {
+    /**
+     * Returns an inorder transversal. A inorder transversal is one where
+     * the left nodes are acessed before the parent nodes, and the parent nodes
+     * are accessed before thei right nodes.
+     * @param marker the Position to start iterating at
+     * @return a Queue containing the Positions of the Nodes to iterate over.
+     */
+    public Queue<Position<E>> inorder(Position<E> marker) {
         emptyQueue();
-        inorder(marker);
+        inorderInt(marker);
         return iteratorQue;
     }
 
-    private void inorder(Position<E> pos) {
+    /**
+     * Internal method for inorder iteration.
+     * @param pos recursive node to iterate over.
+     */
+    private void inorderInt(Position<E> pos) {
         if (tree.left(pos) != null) {
-            inorder(tree.left(pos));
+            inorderInt(tree.left(pos));
         }
-        iteratorQue.enqueue(pos.getElement());
+        iteratorQue.enqueue(pos);
         if (tree.right(pos) != null) {
-            inorder(tree.right(pos));
+            inorderInt(tree.right(pos));
         }
     }
 
-    public Queue<E> eulerTour() {
+    /**
+     * Returns a Euler Tour transversal. A Euler Tour transversal is one where
+     * you visit all the nodes in a tree at least once. You will iterate over
+     * internal nodes more than once.
+     * @param marker the Position to start iterating at
+     * @return a Queue containing the Positions of the Nodes to iterate over.
+     */
+    public Queue<Position<E>> eulerTour(Position<E> marker) {
         emptyQueue();
-        eulerTour(marker);
+        eulerTourInt(marker);
         return iteratorQue;
     }
 
-    private void eulerTour(Position<E> pos) {
-        
+    /**
+     * Internal method for Euler Tour iteration.
+     * @param pos recursive node to iterate over.
+     */
+    private void eulerTourInt(Position<E> pos) {
+        iteratorQue.enqueue(pos);
+        for (Position<E> child : tree.children(pos)) {
+            eulerTourInt(child);
+            iteratorQue.enqueue(pos);
+        }
     }
 
+    /**
+     * Returns a breadth first transversal. A breadth first transversal is one where all nodes on the same depth are accessed first befor emoving lower.
+     * @param marker the Position to start iterating at
+     * @return a Queue containing the Positions of the Nodes to iterate over.
+     */
+    public Queue<Position<E>> breadthFirst(Position<E> marker) {
+        emptyQueue();
+        breadthFirstInt(marker);
+        return iteratorQue;
+    }
+
+    /**
+     * Internal method for bredth first iteration.
+     * @param pos recursive node to iterate over.
+     */
+    private void breadthFirstInt(Position<E> pos) {
+        Queue<Position<E>> pass = new Queue<>();
+        pass.enqueue(pos);
+        while(!pass.isEmpty()) {
+            Position<E> node = pass.dequeue();
+            iteratorQue.enqueue(node);
+            if (tree.children(node).size() > 0) {
+                for (Position<E> child : tree.children(node)) {
+                    pass.enqueue(child);
+                }
+            }
+        }
+    }
 
     /**
      * Before an iteration, the queue must be empty to work properly. If it

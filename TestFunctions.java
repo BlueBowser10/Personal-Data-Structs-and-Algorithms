@@ -1,5 +1,6 @@
 import LinearDataStructures.*;
-import ADTInterfaces.Position;
+
+import ADTInterfaces.*;
 import NonLinearDataStructures.*;
 
 public class TestFunctions {
@@ -708,6 +709,77 @@ public class TestFunctions {
                 }
             }
         }
+    }
+
+    public static void testTreeIterator() {
+        print("Testing Tree Iteration...\n==================\n");
+        BinaryTree<Integer> tree = new BinaryTree<>();
+        Position<Integer> root = tree.addRoot(1);
+        tree.addLeft(root, 2);
+        tree.addRight(root, 3);
+        tree.addLeft(tree.left(root), 4);
+        tree.addRight(tree.left(root), 5);
+        tree.addRight(tree.right(root), 6);
+
+        print("Tree structure:");
+        print("\t\t\t1");
+        print("\t\t2\t\t3");
+        print("\t4\t5\t\t\t6\t");
+        print();
+        print("Testing breadth-first iteration: ");
+        print("Order should be: \n1 2 3 4 5 6");
+        TreeIterator<Integer> iter = new TreeIterator<>(tree);
+        Queue<Position<Integer>> iterQue = iter.breadthFirst(root);
+        String order = "";
+        while (!iterQue.isEmpty()) {
+            order += iterQue.dequeue().getElement() + " ";
+        }
+        print(order);
+        print();
+
+       print("Testing preorder iteration: ");
+        print("Order should be: \n1 2 4 5 3 6");
+        iter = new TreeIterator<>(tree);
+        iterQue = iter.preorder(root);
+        order = "";
+        while (!iterQue.isEmpty()) {
+            order += iterQue.dequeue().getElement() + " ";
+        }
+        print(order);
+        print();
+
+        print("Testing postorder iteration: ");
+        print("Order should be: \n4 5 2 6 3 1");
+        iter = new TreeIterator<>(tree);
+        iterQue = iter.postorder(root);
+        order = "";
+        while (!iterQue.isEmpty()) {
+            order += iterQue.dequeue().getElement() + " ";
+        }
+        print(order);
+        print();
+
+        print("Testing inorder iteration: ");
+        print("Order should be: \n4 2 5 1 3 6");
+        iter = new TreeIterator<>(tree);
+        iterQue = iter.inorder(root);
+        order = "";
+        while (!iterQue.isEmpty()) {
+            order += iterQue.dequeue().getElement() + " ";
+        }
+        print(order);
+        print();
+
+        print("Testing euler tour iteration: ");
+        print("Order should be: \n1 2 4 2 5 2 1 3 6 3 1");
+        iter = new TreeIterator<>(tree);
+        iterQue = iter.eulerTour(root);
+        order = "";
+        while (!iterQue.isEmpty()) {
+            order += iterQue.dequeue().getElement() + " ";
+        }
+        print(order);
+        print();
     }
 
     public static void print(Object s) {
