@@ -6,8 +6,8 @@ import LinearDataStructures.Queue;
 /**
  * This is a class for iterating through the different types of trees.
  * It supports preorder, postorder, inorder, and Euler tours, especially for
- * BinaryTrees. It mainly does this by returning a queue of all the elements of
- * the tree, in the order the elements should be iterated in.
+ * BinaryTrees. It mainly does this by returning a queue of all the Positions
+ *  of the elements of the tree, in the order the elements should be iterated in.
 */
 public class TreeIterator<E> {
 
