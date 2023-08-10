@@ -8,6 +8,8 @@ import LinearDataStructures.Queue;
  * It supports preorder, postorder, inorder, and Euler tours, especially for
  * BinaryTrees. It mainly does this by returning a queue of all the Positions
  *  of the elements of the tree, in the order the elements should be iterated in.
+ * @author BlueBowser
+ * @param <E> the type of elements the Tree will be iterating over.
 */
 public class TreeIterator<E> {
 

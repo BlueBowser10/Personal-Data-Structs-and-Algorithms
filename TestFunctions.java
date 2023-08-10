@@ -782,6 +782,62 @@ public class TestFunctions {
         print();
     }
 
+    public static void testLinearPriorityQueue() {
+        print("Testing linear priority queue...");
+        print("==========================================");
+        print();
+
+        print("creating new priority queue");
+        LinearPriorityQueue<Integer, String> pq = new LinearPriorityQueue<>();
+        print(pq);
+
+        print("\nInserting into empty...");
+        print("before: " + pq);
+        pq.insert(5, "first item!");
+        print("after: " + pq);
+
+        print("\nInserting greater priority item...");
+        print("before: " + pq);
+        pq.insert(2, "even more important item!");
+        print("after: " + pq);
+
+        print("\nTesting insert a lesser priority item...");
+        pq.removeMostImportant();
+        print("before: " + pq);
+        pq.insert(7, "even more important item!");
+        print("after: " + pq);
+        int i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        print("\nclearing queue and testing adding a equal priority item...");
+        pq = new LinearPriorityQueue<>();
+        pq.insert(5, "important item");
+        print("before: " + pq);
+        pq.insert(5, "hey, me impo too!");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        print("\nadding more elements...");
+        pq.insert(2, "duck");
+        pq.insert(20, "not impo");
+        print("queue now: " + pq);
+
+        print("most important item: " + pq.mostImportant());
+        print("removing most important item...");
+        print("before: " + pq);
+        Object entry = pq.removeMostImportant();
+        print("removed item: " + entry);
+        print("after: " + pq);
+
+    }
+
     public static void print(Object s) {
         System.out.println(s);
     }
