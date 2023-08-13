@@ -782,13 +782,13 @@ public class TestFunctions {
         print();
     }
 
-    public static void testLinearPriorityQueue() {
-        print("Testing linear priority queue...");
+    public static void testHeapPriorityQueue() {
+        print("Testing heap priority queue...");
         print("==========================================");
         print();
 
         print("creating new priority queue");
-        LinearPriorityQueue<Integer, String> pq = new LinearPriorityQueue<>();
+        HeapPriorityQueue<Integer, String> pq = new HeapPriorityQueue<>();
         print(pq);
 
         print("\nInserting into empty...");
@@ -804,7 +804,7 @@ public class TestFunctions {
         print("\nTesting insert a lesser priority item...");
         pq.removeMostImportant();
         print("before: " + pq);
-        pq.insert(7, "even more important item!");
+        pq.insert(7, "less impo item!");
         print("after: " + pq);
         int i = 1;
         while (!pq.isEmpty()) {
@@ -813,7 +813,7 @@ public class TestFunctions {
         }
 
         print("\nclearing queue and testing adding a equal priority item...");
-        pq = new LinearPriorityQueue<>();
+        pq = new HeapPriorityQueue<>();
         pq.insert(5, "important item");
         print("before: " + pq);
         pq.insert(5, "hey, me impo too!");
@@ -825,8 +825,13 @@ public class TestFunctions {
         }
 
         print("\nadding more elements...");
-        pq.insert(2, "duck");
+        pq.insert(10, "duck");
+        pq.insert(5, "cod");
         pq.insert(20, "not impo");
+        pq.insert(15, "gshep");
+        pq.insert(40, "sonimpo");
+        pq.insert(1, "dont disregard me owo");
+
         print("queue now: " + pq);
 
         print("most important item: " + pq.mostImportant());
@@ -836,6 +841,40 @@ public class TestFunctions {
         print("removed item: " + entry);
         print("after: " + pq);
 
+        print("adding one more low priority item with key 0 and reading queue...");
+        print("before: " + pq);
+        pq.insert(0, "the final countdown");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+        }
+
+        print();
+        print("supertest");
+        print("before: " + pq);
+        pq = new HeapPriorityQueue<>();
+        pq.insert(12, "H");
+        pq.insert(14, "E");
+        pq.insert(16, "X");
+        pq.insert(25, "J");
+        pq.insert(11, "S");
+        pq.insert(13, "W");
+        pq.insert(4, "C");
+        pq.insert(5, "A");
+        pq.insert(7, "Q");
+        pq.insert(20, "B");
+        pq.insert(6, "Z");
+        pq.insert(15, "K");
+        pq.insert(9, "F");
+        pq.insert(2, "T");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+        }
+        
+        
     }
 
     public static void print(Object s) {
