@@ -210,4 +210,13 @@ public class Heap<K extends Comparable, V> implements HeapInterface<K, V> {
     public String toString() {
         return "Heap Priority Queue (" + size() + "):\t " + top();
     }
+
+    /**
+     * This returns the internal Binary Tree for the heap.
+     * It can be used as a helper funciton to do heap sorting
+     * @return the internal binary tree that represents the heap.
+     */
+    public BinaryTree getTree() {
+        return this.pile;
+    }
 }
