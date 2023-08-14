@@ -14,6 +14,8 @@ import ADTInterfaces.Position;
  * is easier to take advantage of the BigO(1) time insertion and
  * deletions of an array-based implementation, while also not having
  * to reprogram an entire class for a binary tree.
+ * @param <K> the key to use for an entry. Must be Comparable to itself.
+ * @param <V> the value to use for an entry.
  * @author BlueBowser
  * 
  */

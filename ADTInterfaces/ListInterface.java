@@ -6,6 +6,7 @@ import java.lang.IndexOutOfBoundsException;
  * index starts at {@code 0}
  * @param <T> the type the list holds
  * @author BlueBowser
+ * @see LinearDataStructures.ItemList
  */
 public interface ListInterface<T> {
     /**

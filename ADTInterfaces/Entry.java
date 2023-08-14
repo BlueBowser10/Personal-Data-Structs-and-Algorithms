@@ -1,9 +1,15 @@
 package ADTInterfaces;
 
     /**
-     * This described an entry, which consists of a
+     * This describes an entry, which consists of a
      * non-null key {@code K} and non null entry {@code V}. {@code K} must
-     * be comparable to itself.
+     * be comparable to itself. Entries are used in structures like Maps
+     * and Priority Queues, when certain values are associated with other
+     * values.
+     * @param <K> the value of the key used to acces the Entry. It must
+     * be Comparable.
+     * @param <V> the value stored in the entry
+     * @author BlueBowser
      */
     public class Entry<K extends Comparable, V> {
         /**the priority of the entry. Must not be null. */

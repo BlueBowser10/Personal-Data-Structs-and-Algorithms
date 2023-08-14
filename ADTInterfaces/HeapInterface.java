@@ -8,11 +8,12 @@ import java.util.NoSuchElementException;
  * level, filling the leaves from left to right, and all bottom nodes have
  * at most two children. Heaps also have a special ordering principle
  * called the Heap Property, where the root node has an element smaller
- * that all other elemetns in the tree. As you go down the children,
- * nodes always increase. Heaps are useful for quickly modifying priority queues.
+ * that all other elements in the tree. As you go down the children,
+ * node keys always increase. Heaps are useful for quickly modifying priority queues, as well as sorting.
  * @param <K> the key of the entry. Must be Comparable.
  * @param <V> the value of the entry.
  * @author BlueBowser
+ * @see NonLinearDataStructures.Heap
  */
 public interface HeapInterface<K extends Comparable, V> {
     /**
@@ -44,7 +45,7 @@ public interface HeapInterface<K extends Comparable, V> {
     /**
      * Removes the entry from the root of the heap, and
      * updates the heap.
-     * @return the entry at the top.
+     * @return the entry at the top of the heap.
      * @throws NoSuchElementException if the heap is empty
      */
     public Entry<K, V> removeTop() throws NoSuchElementException;

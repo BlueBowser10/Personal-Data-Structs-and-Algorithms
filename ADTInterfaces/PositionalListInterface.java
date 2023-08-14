@@ -3,6 +3,9 @@ package ADTInterfaces;
 /**
  * This interface describes the operations of a Positional List ADT. it will
  * be implemented later with a class.
+ * @param <T> the type the list holds
+ * @author BlueBowser
+ * @see LinearDataStructures.PositionalList
  */
 public interface PositionalListInterface<T> {
     /**

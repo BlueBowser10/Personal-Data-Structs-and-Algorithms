@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * by a class.
  * @param <T> the type the queue holds
  * @author BlueBowser
+ * @see LinearDataStructures.Queue
  */
 public interface QueueInterface<T> {
     /**

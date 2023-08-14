@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * implemented later with a class.
  * @param <T> the type the stack holds
  * @author BlueBowser
+ * @see LinearDataStructures.Stack
  */
 public interface StackInterface<T> {
 

@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * implemented later by a class.
  * @param <T> the type the deque holds
  * @author BlueBowser
+ * @see LinearDataStrucutres.Deque;
  */
 public interface DequeInterface<T> {
     /**
@@ -43,7 +44,7 @@ public interface DequeInterface<T> {
     public T popFront() throws NoSuchElementException;
 
     /**
-     * REmoves the element from the back of the Deque and returns it.
+     * Removes the element from the back of the Deque and returns it.
      * @return the back element of the Deque
      * @throws NoSuchElementException if the queue is empty
      */

@@ -5,7 +5,7 @@ package ADTInterfaces;
  * It will be implemented later using classes.
  * @param <T> the type the list holds
  * @author BlueBowser
- * @see SinglyLinkedList
+ * @see LinearDataStructures.CircularlyLinkedList;
  */
 public interface CircularlyLinkedListInterface<T> extends SinglyLinkedList<T> {
     /**

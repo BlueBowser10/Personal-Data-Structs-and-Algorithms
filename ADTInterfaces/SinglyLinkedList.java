@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
  * 
  * @param <T> the type that the list holds
  * @author BlueBowser
+ * @see LinearDataStructures.LinkedList
  */
 public interface SinglyLinkedList<T> {
 
