@@ -873,8 +873,142 @@ public class TestFunctions {
         while (!pq.isEmpty()) {
             print(i + " " + pq.removeMostImportant());
         }
+    }
+
+    public static void testAdaptablePriorityQueue() {
+        print("Testing adaptable priority queue...");
+        print("==========================================");
+        print();
+
+        print("creating new priority queue");
+        AdaptablePriorityQueue<Integer, String> pq = new AdaptablePriorityQueue<Integer, String>();
+        print(pq);
+
+        print("\nInserting into empty...");
+        print("before: " + pq);
+        pq.insert(5, "first item!");
+        print("after: " + pq);
+
+        print("\nInserting greater priority item...");
+        print("before: " + pq);
+        pq.insert(2, "even more important item!");
+        print("after: " + pq);
+
+        print("\nTesting insert a lesser priority item...");
+        pq.removeMostImportant();
+        print("before: " + pq);
+        pq.insert(7, "less impo item!");
+        print("after: " + pq);
+        int i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        print("\nclearing queue and testing adding a equal priority item...");
+        pq = new AdaptablePriorityQueue<>();
+        pq.insert(5, "important item");
+        print("before: " + pq);
+        pq.insert(5, "hey, me impo too!");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        print("\nadding more elements...");
+        pq.insert(10, "duck");
+        pq.insert(5, "cod");
+        pq.insert(20, "not impo");
+        pq.insert(15, "gshep");
+        pq.insert(40, "sonimpo");
+        pq.insert(1, "dont disregard me owo");
+
+        print("queue now: " + pq);
+
+        print("most important item: " + pq.mostImportant());
+        print("removing most important item...");
+        print("before: " + pq);
+        Object entry = pq.removeMostImportant();
+        print("removed item: " + entry);
+        print("after: " + pq);
+
+        print("adding one more low priority item with key 0 and reading queue...");
+        print("before: " + pq);
+        pq.insert(0, "the final countdown");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+        }
+
+        print();
+        print("supertest");
+        print("before: " + pq);
+        pq = new AdaptablePriorityQueue<>();
+        pq.insert(12, "H");
+        pq.insert(14, "E");
+        pq.insert(16, "X");
+        pq.insert(25, "J");
+        pq.insert(11, "S");
+        pq.insert(13, "W");
+        pq.insert(4, "C");
+        pq.insert(5, "A");
+        pq.insert(7, "Q");
+        pq.insert(20, "B");
+        pq.insert(6, "Z");
+        pq.insert(15, "K");
+        pq.insert(9, "F");
+        pq.insert(2, "T");
+        print("after: " + pq);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        print("clearing queue and testing entry modifications...");
+        pq = new AdaptablePriorityQueue<>();
+        pq.insert(5, "B");
+        print("queue now is: ");
+        print(pq);
         
+        print("inserting elements...");
+        pq.insert(7, "C");
+        print("increasing priority...");
+        print("before: " + pq);
+        pq.replaceKey(new Entry<Integer,String>(7,"C"), 1);
+        print("after: " + pq);
+        pq.insert(7, "duck");
+        print("testing midling priority...");
+        pq.replaceKey(new Entry<Integer,String>(7,"duck"), 3);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
+
+        pq = new AdaptablePriorityQueue<>();
+        pq.insert(5, "B");
+        print("queue now is: ");
+        print(pq);
         
+        print("inserting elements...");
+        pq.insert(7, "C");
+        print("decreasing priority...");
+        print("before: " + pq);
+        pq.replaceKey(new Entry<Integer,String>(5,"B"), 10);
+        print("after: " + pq);
+        pq.insert(1, "duck");
+        pq.insert(2, "fren");
+        print("testing midling priority...");
+        pq.replaceKey(new Entry<Integer,String>(1,"duck"), 3);
+        i = 1;
+        while (!pq.isEmpty()) {
+            print(i + " " + pq.removeMostImportant());
+            i++;
+        }
     }
 
     public static void print(Object s) {

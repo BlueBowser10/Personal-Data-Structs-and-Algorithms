@@ -21,7 +21,7 @@ public class LinearPriorityQueue<K extends Comparable, V> extends  AbstractPrior
     /**
      * The sorted list to hold the queue.
      */
-    PositionalList<Entry<K,V>> queue;
+    protected PositionalList<Entry<K,V>> queue;
 
     /**
      * Creates an empty priority queue.
@@ -83,7 +83,7 @@ public class LinearPriorityQueue<K extends Comparable, V> extends  AbstractPrior
      * @param o argument to be checked.
      * @throws IllegalArgumentException if the object is null.
      */
-    private void checkIfNull(Object o) throws IllegalArgumentException{
+    protected void checkIfNull(Object o) throws IllegalArgumentException{
         if (o == null) {
             throw new IllegalArgumentException("argument is null!");
         }

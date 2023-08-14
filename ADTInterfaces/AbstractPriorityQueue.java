@@ -12,6 +12,8 @@ import java.util.NoSuchElementException;
  * farther back down the Priority Queue you go, the lower the priority of the
  * elements. For default, we will assume that an element with the highest 
  * priority will have the smallest key.
+ * 
+ * Priority Queues can be implemented with Lists or with Heaps.
  * @author BlueBowser
  * @param <K> the type that will be used to assign priority. It must be comparable to itself.
  * @param <V> the content that will be used to assign priority. It must be comparable to itself.
